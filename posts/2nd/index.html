@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>linked list :: Security Blogs</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The purpose of this room to explore some of the vulnerabilities resulting from improper handling of file uploads." />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://secblogs.netlify.app/posts/2nd/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://secblogs.netlify.app/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://secblogs.netlify.app/img/theme-colors/green.png">
+  <link rel="apple-touch-icon" href="https://secblogs.netlify.app/img/theme-colors/green.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="linked list">
+<meta property="og:description" content="The purpose of this room to explore some of the vulnerabilities resulting from improper handling of file uploads." />
+<meta property="og:url" content="https://secblogs.netlify.app/posts/2nd/" />
+<meta property="og:site_name" content="Security Blogs" />
+
+  
+  
+  <meta property="og:image" content="https://secblogs.netlify.app/">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-08-23 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="green">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    S3c-bl0gs and Writeups
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/posts">Posts</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/posts" >Posts</a></li>
+        
+      
+      
+        <li>
+          <ul class="menu">
+            <li class="menu__trigger">Show more&nbsp;▾</li>
+            <li>
+              <ul class="menu__dropdown">
+                
+                  
+                    <li><a href="/showcase" >Showcase</a></li>
+                  
+                
+              </ul>
+            </li>
+          </ul>
+        </li>
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://secblogs.netlify.app/posts/2nd/">linked list</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-08-23</time><span class="post-author">sumit</span></div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h2 id="introduction">Introduction<a href="#introduction" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p><strong>Stack</strong> is a <strong>linear data structure</strong> that follows a particular order in which several type of operations like push pull are performed. The order can be <code>LIFO</code> or <code>FILO</code>, both are same so don&rsquo;t be confused.</p>
+<p>LIFO:(Last in first out) It means which element that can be filled at last that will be removed first.</p>
+<p>FILO:(first in last out) It means that element will be removed at last which is filled at first.</p>
+<table>
+<thead>
+<tr>
+<th>Operations that can be performed:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. push</td>
+</tr>
+<tr>
+<td>2. pop</td>
+</tr>
+<tr>
+<td>3. peek</td>
+</tr>
+<tr>
+<td>4. isempty</td>
+</tr>
+</tbody>
+</table>
+<h2 id="creation-of-stack">Creation of stack<a href="#creation-of-stack" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>This code represents a basic stack data structure. The class has three properties: <code>arr</code> (a pointer to an integer array to store the stack elements), <code>top</code> (an integer to represent the index of the topmost element in the stack), and <code>size</code> (an integer specifying the maximum capacity of the stack). Also, the class has a constructor that takes an integer <code>size</code> as a parameter and initializes the properties accordingly. The constructor allocates memory for the stack using the <code>new</code> keyword, sets the stack size, and initializes <code>top</code> to -1 to indicate that the stack is initially empty.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//array emplementation of stack
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">#include</span><span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">stack</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//properties
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>arr;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> top;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> size;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//behaviour
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    stack(<span style="color:#66d9ef">int</span> size) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span> <span style="color:#f92672">-&gt;</span> size <span style="color:#f92672">=</span> size;
+</span></span><span style="display:flex;"><span>        arr <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[size];
+</span></span><span style="display:flex;"><span>        top<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> };
+</span></span></code></pre></div><h2 id="push-function">Push Function<a href="#push-function" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>The <code>push</code> function is part of the <code>stack</code> class. It adds a new element to the stack. It checks if there is space available by comparing the difference between the maximum size of the stack and the current top index. If space is available, the function increments the top index to make room for the new element, assigns the new element to the top position in the array, effectively adding it to the stack. If the stack is already full, the function prints an error message indicating &ldquo;stack overflow,&rdquo; signifying that the operation cannot be performed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//push function
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">push</span> (<span style="color:#66d9ef">int</span> element) {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">if</span>(size<span style="color:#f92672">-</span>top <span style="color:#f92672">&gt;</span><span style="color:#ae81ff">1</span> ){
+</span></span><span style="display:flex;"><span>           top<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>           arr[top] <span style="color:#f92672">=</span> element;
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>           cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;stack overflow&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>   }
+</span></span></code></pre></div><h2 id="pop-function">Pop Function<a href="#pop-function" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>The <code>pop</code> function remove the topmost element from the stack, it follows the (LIFO) principle. It first checks if there are any elements in the stack by examining the value of the top index. If the top index is greater than or equal to 0, it means there is at least one element in the stack. In that case, the function decrements the top index, effectively removing the top element and making the next element (if any) the new top. However, if the top index is less than 0, it means the stack is empty, and there are no elements to remove. In this situation, the function prints an error message, &ldquo;stack underflow,&rdquo;.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">//pop function
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pop</span>(){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(top <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>            top<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>            cout<span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; stack underflow &#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h2 id="peek-function">Peek Function<a href="#peek-function" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>The <code>peek</code> function is used to look at the topmost element of the stack without removing it. When called, the function first checks if there are any elements in the stack by examining the value of the top index. If the top index is greater than or equal to 0, it means there is at least one element in the stack. In this case, the function returns the value of the element at the top position. However, if the top index is less than 0, it means the stack is empty, and there are no elements to peek at. In this situation, the function prints an error message, &ldquo;stack is empty,&rdquo; and returns -1 to indicate that there&rsquo;s no valid element to return.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">peek</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(top <span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span> )
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> arr[top];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;stack is empty &#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h2 id="isempty-function">IsEmpty function<a href="#isempty-function" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>The <code>isempty</code> function is used to check whether the stack is empty or not. When called, the function examines the value of the <code>top</code> index, which represents the position of the topmost element in the stack. If the <code>top</code> index is equal to -1, it means there are no elements in the stack, and it is considered empty. In this case, the function returns <code>true</code> to indicate that the stack is empty. However, if the <code>top</code> index is not -1, it means there is at least one element in the stack, and it is not empty. In this situation, the function returns <code>false</code> to indicate that the stack is not empty. In summary, the <code>isempty</code> function provides a convenient way to check the emptiness status of the stack, returning <code>true</code> if it&rsquo;s empty and <code>false</code> if it contains elements.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isempty</span>(){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(top <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;   
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h2 id="the-main-function">The main function<a href="#the-main-function" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>In this C++ code, the <code>main</code> function demonstrates the usage of a stack. Firstly, it creates a stack object <code>st</code> with a size of 5. Then, it uses the <code>push</code> function to add three elements (22, 33, and 44) to the stack. The <code>peek</code> function is called to print the top element <code>44</code>. Subsequently, the <code>pop</code> function is used to remove the top element from the stack, and <code>peek</code> is called again to print the new top element <code>33</code>. This process is repeated two more times with the last element <code>22</code> being popped, and <code>peek</code> is called again, but the stack is now empty. Finally, the <code>isempty</code> function is called to verify if the stack is empty, and it prints <em><strong>stack is empty</strong></em> as the output, confirming that the stack is empty at this point.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>    stack st(<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    st.push(<span style="color:#ae81ff">22</span>);
+</span></span><span style="display:flex;"><span>    st.push(<span style="color:#ae81ff">33</span>);
+</span></span><span style="display:flex;"><span>    st.push(<span style="color:#ae81ff">44</span>);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> st.peek()<span style="color:#f92672">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>    st.pop();
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> st.peek()<span style="color:#f92672">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>st.pop();
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> st.peek()<span style="color:#f92672">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>    st.pop();
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> st.peek()<span style="color:#f92672">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(st.isempty()){
+</span></span><span style="display:flex;"><span>        cout<span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;stack is empty&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    cout<span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;stack is not empty&#34;</span><span style="color:#f92672">&lt;&lt;</span>endl;
+</span></span><span style="display:flex;"><span> }
+</span></span></code></pre></div>
+
+
+  <div class="collapsable-code">
+    <input id="1" type="checkbox" checked />
+    <label for="1">
+      <span class="collapsable-code__language">c&#43;&#43;</span>
+      <span class="collapsable-code__title"><strong>output of the following code</strong></span>
+      <span class="collapsable-code__toggle" data-label-expand="Show" data-label-collapse="Hide"></span>
+    </label>
+    <pre class="language-c&#43;&#43;" ><code>
+
+//array emplementation of stack
+
+ #include&lt;iostream&gt;
+ 
+ using namespace std;
+
+ class stack {
+    //properties
+    public:
+        int *arr;
+        int top;
+        int size;
+
+    //behaviour
+    stack(int size) {
+        this -&gt; size = size;
+        arr = new int[size];
+        top=-1;
+    }
+
+    void push (int element) {
+        if(size-top &gt;1 ){
+            top&#43;&#43;;
+            arr[top] = element;
+        }
+        else{
+            cout &lt;&lt; &#34;stack overflow&#34; &lt;&lt; endl;
+        }
+    }
+
+    void pop(){
+        if(top &gt;= 0){
+            top--;
+        }
+        else{
+            cout&lt;&lt; &#34; stack underflow &#34;&lt;&lt;endl;
+        }
+
+    }
+
+    int peek() {
+        if(top &gt;=0 )
+            return arr[top];
+        else{
+            cout &lt;&lt;&#34;stack is empty &#34;&lt;&lt;endl;
+            return -1;
+        }
+    }
+
+    bool isempty(){
+        if(top == -1){
+            return true;
+        }
+        else{
+            return false;   
+        }
+    }
+
+ };
+
+ int main(){
+    stack st(5);
+
+    st.push(22);
+    st.push(33);
+    st.push(44);
+    cout &lt;&lt; st.peek()&lt;&lt;endl;
+    st.pop();
+    cout &lt;&lt; st.peek()&lt;&lt;endl;
+st.pop();
+    cout &lt;&lt; st.peek()&lt;&lt;endl;
+    st.pop();
+    cout &lt;&lt; st.peek()&lt;&lt;endl;
+
+    if(st.isempty()){
+        cout&lt;&lt; &#34;stack is empty&#34;&lt;&lt;endl;
+    }
+    else
+    cout&lt;&lt;&#34;stack is not empty&#34;&lt;&lt;endl;
+ }
+</code></pre>
+  </div>
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        <span class="button previous">
+            <a href="https://secblogs.netlify.app/posts/pickle-rick/pickle-rick/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Pickle Rick</span>
+            </a>
+        </span>
+        
+        
+        <span class="button next">
+            <a href="https://secblogs.netlify.app/posts/first/">
+                <span class="button__text">Upload Vulnerabilities</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2023 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

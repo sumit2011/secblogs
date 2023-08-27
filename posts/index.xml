@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Security Blogs</title>
+    <link>https://secblogs.netlify.app/posts/</link>
+    <description>Recent content in Posts on Security Blogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 24 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://secblogs.netlify.app/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pickle Rick</title>
+      <link>https://secblogs.netlify.app/posts/pickle-rick/pickle-rick/</link>
+      <pubDate>Thu, 24 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://secblogs.netlify.app/posts/pickle-rick/pickle-rick/</guid>
+      <description>Intro This Rick and Morty-themed challenge requires you to exploit a web server and find three ingredients to help Rick make his potion and transform himself back into a human from a pickle.
+Room Link: https://tryhackme.com/room/picklerick
+⚠️Tools used: &amp;gt; Ping &amp;gt; Nmap &amp;gt; Nikto &amp;gt; Gobuster &amp;gt; Python3 First deploy the machine and wait for a minute.
+Scaning and enumaration Go to the site: copy paste the ip into your address bar of your browser.</description>
+      <content>
+&lt;img src=&#34;../images/test.png&#34;  alt=&#34;Hello Friend&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;
+&lt;p&gt;This Rick and Morty-themed challenge requires you to exploit a web server and find three ingredients to help Rick make his potion and transform himself back into a human from a pickle.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Room Link: &lt;a href=&#34;https://tryhackme.com/room/picklerick&#34;&gt;https://tryhackme.com/room/picklerick&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;⚠️Tools used:&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; Ping&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; Nmap&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; Nikto&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; Gobuster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; Python3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;First deploy the machine and wait for a minute.&lt;/p&gt;
+&lt;h1 id=&#34;scaning-and-enumaration&#34;&gt;Scaning and enumaration&lt;/h1&gt;
+&lt;p&gt;Go to the site: copy paste the ip into your address bar of your browser.&lt;/p&gt;
+
+&lt;img src=&#34;../images/home.png&#34;  alt=&#34;home page&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;p&gt;Now view the page source:
+
+
+
+  &lt;div class=&#34;collapsable-code&#34;&gt;
+    &lt;input id=&#34;1&#34; type=&#34;checkbox&#34; checked /&gt;
+    &lt;label for=&#34;1&#34;&gt;
+      &lt;span class=&#34;collapsable-code__language&#34;&gt;html&lt;/span&gt;
+      &lt;span class=&#34;collapsable-code__title&#34;&gt;View page source&lt;/span&gt;
+      &lt;span class=&#34;collapsable-code__toggle&#34; data-label-expand=&#34;Show&#34; data-label-collapse=&#34;Hide&#34;&gt;&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;pre class=&#34;language-html&#34; &gt;&lt;code&gt;
+&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;title&amp;gt;Rick is sup4r cool&amp;lt;/title&amp;gt;
+  &amp;lt;meta charset=&amp;#34;utf-8&amp;#34;&amp;gt;
+  &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1&amp;#34;&amp;gt;
+  &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;assets/bootstrap.min.css&amp;#34;&amp;gt;
+  &amp;lt;script src=&amp;#34;assets/jquery.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;script src=&amp;#34;assets/bootstrap.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;style&amp;gt;
+  .jumbotron {
+    background-image: url(&amp;#34;assets/rickandmorty.jpeg&amp;#34;);
+    background-size: cover;
+    height: 340px;
+  }
+  &amp;lt;/style&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+
+  &amp;lt;div class=&amp;#34;container&amp;#34;&amp;gt;
+    &amp;lt;div class=&amp;#34;jumbotron&amp;#34;&amp;gt;&amp;lt;/div&amp;gt;
+    &amp;lt;h1&amp;gt;Help Morty!&amp;lt;/h1&amp;gt;&amp;lt;/br&amp;gt;
+    &amp;lt;p&amp;gt;Listen Morty... I need your help, I&amp;#39;ve turned myself into a pickle again and this time I can&amp;#39;t change back!&amp;lt;/p&amp;gt;&amp;lt;/br&amp;gt;
+    &amp;lt;p&amp;gt;I need you to &amp;lt;b&amp;gt;*BURRRP*&amp;lt;/b&amp;gt;....Morty, logon to my computer and find the last three secret ingredients to finish my pickle-reverse potion. The only problem is,
+    I have no idea what the &amp;lt;b&amp;gt;*BURRRRRRRRP*&amp;lt;/b&amp;gt;, password was! Help Morty, Help!&amp;lt;/p&amp;gt;&amp;lt;/br&amp;gt;
+  &amp;lt;/div&amp;gt;
+
+  &amp;lt;!--
+
+    Note to self, remember username!
+
+    Username: R1ckRul3s
+
+  --&amp;gt;
+
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+&lt;/p&gt;
+
+&lt;img src=&#34;../images/pagesource.png&#34;  alt=&#34;page source&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;p&gt;we get the some information&lt;br&gt;
+Username:&lt;code&gt;R1ckRul3s&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;nmap-scan&#34;&gt;nmap scan&lt;/h2&gt;
+&lt;p&gt;For nmap scanning run the following command.&lt;br&gt;
+command:&lt;code&gt;nmap -sC -sV -oN nmap/initial 10.10.252.71&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌──&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;sumit㉿mr-nob0dy&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;~/ctf/tryhackme/pickle-rick&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─$ nmap -sC -sV -oN nmap/initial 10.10.252.71     
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Starting Nmap 7.94 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt; https://nmap.org &lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; at 2023-08-24 23:10 IST
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Nmap scan report &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; 10.10.252.71
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host is up &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;0.19s latency&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Not shown: &lt;span style=&#34;color:#ae81ff&#34;&gt;998&lt;/span&gt; closed tcp ports &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;conn-refused&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PORT   STATE SERVICE VERSION
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.6 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Ubuntu Linux; protocol 2.0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| ssh-hostkey: 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|   &lt;span style=&#34;color:#ae81ff&#34;&gt;2048&lt;/span&gt; 9a:b9:16:db:60:77:f9:19:04:43:b8:5f:05:06:dc:7d &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;RSA&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|   &lt;span style=&#34;color:#ae81ff&#34;&gt;256&lt;/span&gt; 8a:ee:ab:e9:ad:7f:e5:1e:88:0e:0d:f0:8f:4c:4e:b6 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;ECDSA&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_  &lt;span style=&#34;color:#ae81ff&#34;&gt;256&lt;/span&gt; 2d:4b:46:62:da:ce:07:a8:75:a5:41:ab:47:f4:03:f1 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;ED25519&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;80/tcp open  http    Apache httpd 2.4.18 &lt;span style=&#34;color:#f92672&#34;&gt;((&lt;/span&gt;Ubuntu&lt;span style=&#34;color:#f92672&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;|_http-title: Rick is sup4r cool
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Nmap &lt;span style=&#34;color:#66d9ef&#34;&gt;done&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; IP address &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; host up&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; scanned in 84.08 seconds
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Port 22- ssh&lt;/p&gt;
+&lt;p&gt;Here we are able to see that our SSH port is open. This port isn&amp;rsquo;t too vulnerable unless we have found someones credentials. Se we will not mess with it.&lt;/p&gt;
+&lt;p&gt;Port 80- http&lt;/p&gt;
+&lt;p&gt;It is here were we find a webservice. Lets poke around and see if there is anyting interesting.&lt;/p&gt;
+&lt;h1 id=&#34;finding-hidden-directories&#34;&gt;Finding hidden directories&lt;/h1&gt;
+&lt;p&gt;We are going to be using gobuster to try and locate any directories that may have been hidden from us.&lt;br&gt;
+Command: &lt;code&gt;gobuster dir -u http://10.10.252.71/ -w /opt/directory-list-2.3-medium.txt -x php,html,css,js,txt&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌──&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;sumit㉿mr-nob0dy&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;~/ctf/tryhackme/pickle-rick&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─$ gobuster dir -u http://10.10.252.71/ -w /opt/directory-list-2.3-medium.txt -x php,html,css,js,txt   
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Gobuster v3.6
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;by OJ Reeves &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;@TheColonial&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &amp;amp; Christian Mehlmauer &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;@firefart&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;+&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Url:                     http://10.10.252.71/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;+&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Method:                  GET
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;+&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Threads:                 &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;+&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Wordlist:                /opt/directory-list-2.3-medium.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;+&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Negative Status codes:   &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;+&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; User Agent:              gobuster/3.6
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;+&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Extensions:              html,css,js,txt,php
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;+&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Timeout:                 10s
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Starting gobuster in directory enumeration mode
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/.php                 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Status: 403&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Size: 291&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/.html                &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Status: 403&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Size: 292&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/index.html           &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Status: 200&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Size: 1062&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/login.php            &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Status: 200&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Size: 882&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now we have a login.php so try to go to the login.php again go to the address bar.&lt;/p&gt;
+
+&lt;img src=&#34;../images/login.png&#34;  alt=&#34;login page&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;p&gt;So we need username and password we already have the user name but we dont have the password for this we check the robots.txt file.&lt;/p&gt;
+
+&lt;img src=&#34;../images/passwd.png&#34;  alt=&#34;passwd&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;p&gt;So here we get some text so that can be the password now try to login with these credentials.&lt;br&gt;
+Username: &lt;code&gt;R1ckRul3s&lt;/code&gt;&lt;br&gt;
+passwd: &lt;code&gt;Wubbalubbadubdub&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now we go to login.php and enter the username and password
+woooo login successfull now we are on the command pannel
+now type ls and hit execute.&lt;/p&gt;
+
+&lt;img src=&#34;../images/command-panel.png&#34;  alt=&#34;command panel&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;p&gt;We get some file one of them is &lt;code&gt;Sup3rS3cretPickl3Ingred.txt&lt;/code&gt; so this can be our first ingridient
+now we try to open this file.&lt;/p&gt;
+
+&lt;img src=&#34;../images/cmd.png&#34;  alt=&#34;command panel&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;p&gt;Here we see that command &lt;code&gt;cat Sup3rS3cretPickl3Ingred.txt&lt;/code&gt; is not working. so we try some other command one of them is &lt;code&gt;less&lt;/code&gt; (just google it) so we use:&lt;br&gt;
+command: &lt;code&gt;less Sup3rS3cretPickl3Ingred.txt&lt;/code&gt;&lt;/p&gt;
+
+&lt;img src=&#34;../images/first.png&#34;  alt=&#34;ingridient&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;p&gt;Woooo we get our first ingidient: &lt;code&gt;mr. meeseek hair&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now, we try to access home directory.&lt;br&gt;
+command: &lt;code&gt;less /home&lt;/code&gt;&lt;br&gt;
+command: &lt;code&gt;less /home/rick&lt;/code&gt;&lt;br&gt;
+command: &lt;code&gt;less /home/rick/&#39;second ingredients&#39;&lt;/code&gt;&lt;br&gt;
+
+&lt;img src=&#34;../images/second.png&#34;  alt=&#34;ingridient&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+After executing some commands we got the 2nd ingridient.&lt;br&gt;
+Similarly we try to access root directory, so this is the root directory we need root permission for this we use &lt;code&gt;sudo&lt;/code&gt; command.&lt;br&gt;
+command: &lt;code&gt;sudo ls /root&lt;/code&gt;&lt;br&gt;
+command: &lt;code&gt;sudo less /root/3rd.txt&lt;/code&gt;&lt;br&gt;
+
+&lt;img src=&#34;../images/third.png&#34;  alt=&#34;ingridient&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+here also after executing some command we got the third ingridient.&lt;/p&gt;
+&lt;h1 id=&#34;tasks&#34;&gt;Tasks&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;What is the first ingredient that Rick needs?&lt;br&gt;
+&lt;code&gt;Ans: mr. meeseek hair&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;What is the second ingredient in Rick’s potion?&lt;br&gt;
+&lt;code&gt;Ans: 1 jerry tear&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;What is the last and final ingredient?&lt;br&gt;
+&lt;code&gt;Ans: fleeb juice&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;congrats-we-have-successfully-completed-the-room&#34;&gt;Congrats, we have successfully completed the room&amp;hellip;&lt;/h1&gt;
+</content>
+    </item>
+    
+    <item>
+      <title>Upload Vulnerabilities</title>
+      <link>https://secblogs.netlify.app/posts/first/</link>
+      <pubDate>Fri, 18 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://secblogs.netlify.app/posts/first/</guid>
+      <description>Upload Vulnerabilities |&amp;gt; Room link: https://tryhackme.com/room/uploadvulns
+⚠️Tools used: &amp;gt; Burpsuite &amp;gt; gobuster &amp;gt; Wappalyser Tools used: * Burpsuite * gobuster * Wappalyser Task 1 Getting Started Let&amp;rsquo;s deploy the machine to give it a few minutes to boot. click on the Start Machine button. now you have to configure your own pc.
+open host file
+on linux /etc/hosts on windows C:\Windows\System32\drivers\etc\hosts Task 2 Introduction The purpose of this room to explore some of the vulnerabilities resulting from improper handling of file uploads.</description>
+      <content>&lt;h1 id=&#34;upload-vulnerabilities&#34;&gt;Upload Vulnerabilities&lt;/h1&gt;
+&lt;p&gt;|&amp;gt; Room link: &lt;a href=&#34;https://tryhackme.com/room/uploadvulns&#34;&gt;https://tryhackme.com/room/uploadvulns&lt;/a&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;⚠️Tools used:&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; Burpsuite&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; gobuster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; Wappalyser&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Tools used:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; Burpsuite  
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; gobuster   
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; Wappalyser 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;task-1-getting-started&#34;&gt;Task 1 Getting Started&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s deploy the machine to give it a few minutes to boot.
+click on the &lt;code&gt;Start Machine&lt;/code&gt; button.
+now you have to configure your own pc.&lt;/p&gt;
+&lt;p&gt;open host file&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;on linux  /etc/hosts&lt;/li&gt;
+&lt;li&gt;on windows C:\Windows\System32\drivers\etc\hosts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;task-2-introduction&#34;&gt;Task 2 Introduction&lt;/h2&gt;
+&lt;p&gt;The purpose of this room to explore some of the vulnerabilities resulting from improper handling of file uploads.
+We will be looking at:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Overwriting existing files on a server&lt;/li&gt;
+&lt;li&gt;Uploading and Executing Shells on a server&lt;/li&gt;
+&lt;li&gt;Bypassing Client-Side filtering&lt;/li&gt;
+&lt;li&gt;Bypassing various kinds of Server-Side filtering&lt;/li&gt;
+&lt;li&gt;Fooling content type validation checks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// length of the linked
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getlength&lt;/span&gt;()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; Node &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;temp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (temp &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; NULL)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        count&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        temp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;next;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Total nodes present in the list is: %d&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, count);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;div class=&#34;collapsable-code&#34;&gt;
+    &lt;input id=&#34;1&#34; type=&#34;checkbox&#34; checked /&gt;
+    &lt;label for=&#34;1&#34;&gt;
+      &lt;span class=&#34;collapsable-code__language&#34;&gt;css&lt;/span&gt;
+      &lt;span class=&#34;collapsable-code__title&#34;&gt;Really cool snippet&lt;/span&gt;
+      &lt;span class=&#34;collapsable-code__toggle&#34; data-label-expand=&#34;Show&#34; data-label-collapse=&#34;Hide&#34;&gt;&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;pre class=&#34;language-css&#34; &gt;&lt;code&gt;
+pre {
+  background: #1a1a1d;
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  overflow: auto;
+
+  @media (--phone) {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  code {
+    background: none !important;
+    color: #ccc;
+    padding: 0;
+    font-size: inherit;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+
+</content>
+    </item>
+    
+  </channel>
+</rss>

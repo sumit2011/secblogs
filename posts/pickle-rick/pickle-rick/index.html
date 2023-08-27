@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Pickle Rick :: Security Blogs</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="This Rick and Morty-themed challenge requires you to exploit a web server and find three ingredients to help Rick make his potion and transform himself back into a human from a pickle." />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://secblogs.netlify.app/posts/pickle-rick/pickle-rick/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://secblogs.netlify.app/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://secblogs.netlify.app/img/theme-colors/green.png">
+  <link rel="apple-touch-icon" href="https://secblogs.netlify.app/img/theme-colors/green.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Pickle Rick">
+<meta property="og:description" content="This Rick and Morty-themed challenge requires you to exploit a web server and find three ingredients to help Rick make his potion and transform himself back into a human from a pickle." />
+<meta property="og:url" content="https://secblogs.netlify.app/posts/pickle-rick/pickle-rick/" />
+<meta property="og:site_name" content="Security Blogs" />
+
+  
+    <meta property="og:image" content="https://secblogs.netlify.app/img/favicon/green.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-08-24 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="green">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    S3c-bl0gs and Writeups
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/posts">Posts</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/posts" >Posts</a></li>
+        
+      
+      
+        <li>
+          <ul class="menu">
+            <li class="menu__trigger">Show more&nbsp;▾</li>
+            <li>
+              <ul class="menu__dropdown">
+                
+                  
+                    <li><a href="/showcase" >Showcase</a></li>
+                  
+                
+              </ul>
+            </li>
+          </ul>
+        </li>
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://secblogs.netlify.app/posts/pickle-rick/pickle-rick/">Pickle Rick</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-08-24</time><span class="post-author">sumit</span></div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        
+<img src="../images/test.png"  alt="Hello Friend"  class="center"  style="border-radius: 8px;"    />
+
+
+<h1 id="intro">Intro<a href="#intro" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>This Rick and Morty-themed challenge requires you to exploit a web server and find three ingredients to help Rick make his potion and transform himself back into a human from a pickle.</p>
+<blockquote>
+<p>Room Link: <a href="https://tryhackme.com/room/picklerick">https://tryhackme.com/room/picklerick</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>⚠️Tools used:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt; Ping</td>
+</tr>
+<tr>
+<td>&gt; Nmap</td>
+</tr>
+<tr>
+<td>&gt; Nikto</td>
+</tr>
+<tr>
+<td>&gt; Gobuster</td>
+</tr>
+<tr>
+<td>&gt; Python3</td>
+</tr>
+</tbody>
+</table>
+<p>First deploy the machine and wait for a minute.</p>
+<h1 id="scaning-and-enumaration">Scaning and enumaration<a href="#scaning-and-enumaration" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Go to the site: copy paste the ip into your address bar of your browser.</p>
+
+<img src="../images/home.png"  alt="home page"  class="center"  style="border-radius: 8px;"    />
+
+
+<p>Now view the page source:
+
+
+
+  <div class="collapsable-code">
+    <input id="1" type="checkbox" checked />
+    <label for="1">
+      <span class="collapsable-code__language">html</span>
+      <span class="collapsable-code__title">View page source</span>
+      <span class="collapsable-code__toggle" data-label-expand="Show" data-label-collapse="Hide"></span>
+    </label>
+    <pre class="language-html" ><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;en&#34;&gt;
+&lt;head&gt;
+  &lt;title&gt;Rick is sup4r cool&lt;/title&gt;
+  &lt;meta charset=&#34;utf-8&#34;&gt;
+  &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1&#34;&gt;
+  &lt;link rel=&#34;stylesheet&#34; href=&#34;assets/bootstrap.min.css&#34;&gt;
+  &lt;script src=&#34;assets/jquery.min.js&#34;&gt;&lt;/script&gt;
+  &lt;script src=&#34;assets/bootstrap.min.js&#34;&gt;&lt;/script&gt;
+  &lt;style&gt;
+  .jumbotron {
+    background-image: url(&#34;assets/rickandmorty.jpeg&#34;);
+    background-size: cover;
+    height: 340px;
+  }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div class=&#34;container&#34;&gt;
+    &lt;div class=&#34;jumbotron&#34;&gt;&lt;/div&gt;
+    &lt;h1&gt;Help Morty!&lt;/h1&gt;&lt;/br&gt;
+    &lt;p&gt;Listen Morty... I need your help, I&#39;ve turned myself into a pickle again and this time I can&#39;t change back!&lt;/p&gt;&lt;/br&gt;
+    &lt;p&gt;I need you to &lt;b&gt;*BURRRP*&lt;/b&gt;....Morty, logon to my computer and find the last three secret ingredients to finish my pickle-reverse potion. The only problem is,
+    I have no idea what the &lt;b&gt;*BURRRRRRRRP*&lt;/b&gt;, password was! Help Morty, Help!&lt;/p&gt;&lt;/br&gt;
+  &lt;/div&gt;
+
+  &lt;!--
+
+    Note to self, remember username!
+
+    Username: R1ckRul3s
+
+  --&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+  </div>
+
+</p>
+
+<img src="../images/pagesource.png"  alt="page source"  class="center"  style="border-radius: 8px;"    />
+
+
+<p>we get the some information<br>
+Username:<code>R1ckRul3s</code></p>
+<h2 id="nmap-scan">nmap scan<a href="#nmap-scan" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<p>For nmap scanning run the following command.<br>
+command:<code>nmap -sC -sV -oN nmap/initial 10.10.252.71</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>┌──<span style="color:#f92672">(</span>sumit㉿mr-nob0dy<span style="color:#f92672">)</span>-<span style="color:#f92672">[</span>~/ctf/tryhackme/pickle-rick<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>└─$ nmap -sC -sV -oN nmap/initial 10.10.252.71     
+</span></span><span style="display:flex;"><span>Starting Nmap 7.94 <span style="color:#f92672">(</span> https://nmap.org <span style="color:#f92672">)</span> at 2023-08-24 23:10 IST
+</span></span><span style="display:flex;"><span>Nmap scan report <span style="color:#66d9ef">for</span> 10.10.252.71
+</span></span><span style="display:flex;"><span>Host is up <span style="color:#f92672">(</span>0.19s latency<span style="color:#f92672">)</span>.
+</span></span><span style="display:flex;"><span>Not shown: <span style="color:#ae81ff">998</span> closed tcp ports <span style="color:#f92672">(</span>conn-refused<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>PORT   STATE SERVICE VERSION
+</span></span><span style="display:flex;"><span>22/tcp open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.6 <span style="color:#f92672">(</span>Ubuntu Linux; protocol 2.0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>| ssh-hostkey: 
+</span></span><span style="display:flex;"><span>|   <span style="color:#ae81ff">2048</span> 9a:b9:16:db:60:77:f9:19:04:43:b8:5f:05:06:dc:7d <span style="color:#f92672">(</span>RSA<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>|   <span style="color:#ae81ff">256</span> 8a:ee:ab:e9:ad:7f:e5:1e:88:0e:0d:f0:8f:4c:4e:b6 <span style="color:#f92672">(</span>ECDSA<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>|_  <span style="color:#ae81ff">256</span> 2d:4b:46:62:da:ce:07:a8:75:a5:41:ab:47:f4:03:f1 <span style="color:#f92672">(</span>ED25519<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>80/tcp open  http    Apache httpd 2.4.18 <span style="color:#f92672">((</span>Ubuntu<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>|_http-title: Rick is sup4r cool
+</span></span><span style="display:flex;"><span>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+</span></span><span style="display:flex;"><span>Nmap <span style="color:#66d9ef">done</span>: <span style="color:#ae81ff">1</span> IP address <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span> host up<span style="color:#f92672">)</span> scanned in 84.08 seconds
+</span></span></code></pre></div><p>Port 22- ssh</p>
+<p>Here we are able to see that our SSH port is open. This port isn&rsquo;t too vulnerable unless we have found someones credentials. Se we will not mess with it.</p>
+<p>Port 80- http</p>
+<p>It is here were we find a webservice. Lets poke around and see if there is anyting interesting.</p>
+<h1 id="finding-hidden-directories">Finding hidden directories<a href="#finding-hidden-directories" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>We are going to be using gobuster to try and locate any directories that may have been hidden from us.<br>
+Command: <code>gobuster dir -u http://10.10.252.71/ -w /opt/directory-list-2.3-medium.txt -x php,html,css,js,txt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>┌──<span style="color:#f92672">(</span>sumit㉿mr-nob0dy<span style="color:#f92672">)</span>-<span style="color:#f92672">[</span>~/ctf/tryhackme/pickle-rick<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>└─$ gobuster dir -u http://10.10.252.71/ -w /opt/directory-list-2.3-medium.txt -x php,html,css,js,txt   
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span>Gobuster v3.6
+</span></span><span style="display:flex;"><span>by OJ Reeves <span style="color:#f92672">(</span>@TheColonial<span style="color:#f92672">)</span> &amp; Christian Mehlmauer <span style="color:#f92672">(</span>@firefart<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Url:                     http://10.10.252.71/
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Method:                  GET
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Threads:                 <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Wordlist:                /opt/directory-list-2.3-medium.txt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Negative Status codes:   <span style="color:#ae81ff">404</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> User Agent:              gobuster/3.6
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Extensions:              html,css,js,txt,php
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Timeout:                 10s
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span>Starting gobuster in directory enumeration mode
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span>/.php                 <span style="color:#f92672">(</span>Status: 403<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 291<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>/.html                <span style="color:#f92672">(</span>Status: 403<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 292<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>/index.html           <span style="color:#f92672">(</span>Status: 200<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 1062<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>/login.php            <span style="color:#f92672">(</span>Status: 200<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>Size: 882<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>Now we have a login.php so try to go to the login.php again go to the address bar.</p>
+
+<img src="../images/login.png"  alt="login page"  class="center"  style="border-radius: 8px;"    />
+
+
+<p>So we need username and password we already have the user name but we dont have the password for this we check the robots.txt file.</p>
+
+<img src="../images/passwd.png"  alt="passwd"  class="center"  style="border-radius: 8px;"    />
+
+
+<p>So here we get some text so that can be the password now try to login with these credentials.<br>
+Username: <code>R1ckRul3s</code><br>
+passwd: <code>Wubbalubbadubdub</code></p>
+<p>Now we go to login.php and enter the username and password
+woooo login successfull now we are on the command pannel
+now type ls and hit execute.</p>
+
+<img src="../images/command-panel.png"  alt="command panel"  class="center"  style="border-radius: 8px;"    />
+
+
+<p>We get some file one of them is <code>Sup3rS3cretPickl3Ingred.txt</code> so this can be our first ingridient
+now we try to open this file.</p>
+
+<img src="../images/cmd.png"  alt="command panel"  class="center"  style="border-radius: 8px;"    />
+
+
+<p>Here we see that command <code>cat Sup3rS3cretPickl3Ingred.txt</code> is not working. so we try some other command one of them is <code>less</code> (just google it) so we use:<br>
+command: <code>less Sup3rS3cretPickl3Ingred.txt</code></p>
+
+<img src="../images/first.png"  alt="ingridient"  class="center"  style="border-radius: 8px;"    />
+
+
+<p>Woooo we get our first ingidient: <code>mr. meeseek hair</code></p>
+<p>Now, we try to access home directory.<br>
+command: <code>less /home</code><br>
+command: <code>less /home/rick</code><br>
+command: <code>less /home/rick/'second ingredients'</code><br>
+
+<img src="../images/second.png"  alt="ingridient"  class="center"  style="border-radius: 8px;"    />
+
+
+After executing some commands we got the 2nd ingridient.<br>
+Similarly we try to access root directory, so this is the root directory we need root permission for this we use <code>sudo</code> command.<br>
+command: <code>sudo ls /root</code><br>
+command: <code>sudo less /root/3rd.txt</code><br>
+
+<img src="../images/third.png"  alt="ingridient"  class="center"  style="border-radius: 8px;"    />
+
+
+here also after executing some command we got the third ingridient.</p>
+<h1 id="tasks">Tasks<a href="#tasks" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<ol>
+<li>
+<p>What is the first ingredient that Rick needs?<br>
+<code>Ans: mr. meeseek hair</code></p>
+</li>
+<li>
+<p>What is the second ingredient in Rick’s potion?<br>
+<code>Ans: 1 jerry tear</code></p>
+</li>
+<li>
+<p>What is the last and final ingredient?<br>
+<code>Ans: fleeb juice</code></p>
+</li>
+</ol>
+<h1 id="congrats-we-have-successfully-completed-the-room">Congrats, we have successfully completed the room&hellip;<a href="#congrats-we-have-successfully-completed-the-room" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="https://secblogs.netlify.app/posts/first/">
+                <span class="button__text">Upload Vulnerabilities</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2023 Made with 💚 by <a href="https://sumit2011.github.io" target="_blank">Sumit</a></span>
+    
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
