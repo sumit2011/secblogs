@@ -186,11 +186,7 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>Tools used:
-</span></span><span style="display:flex;"><span> <span style="color:#f92672">*</span> Burpsuite  
-</span></span><span style="display:flex;"><span> <span style="color:#f92672">*</span> gobuster   
-</span></span><span style="display:flex;"><span> <span style="color:#f92672">*</span> Wappalyser 
-</span></span></code></pre></div><h2 id="task-1-getting-started">Task 1 Getting Started<a href="#task-1-getting-started" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
+<h2 id="task-1-getting-started">Task 1 Getting Started<a href="#task-1-getting-started" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h2>
 <p>Let&rsquo;s deploy the machine to give it a few minutes to boot.
 click on the <code>Start Machine</code> button.
 now you have to configure your own pc.</p>
@@ -209,19 +205,7 @@ We will be looking at:</p>
 <li>Bypassing various kinds of Server-Side filtering</li>
 <li>Fooling content type validation checks</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// length of the linked
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getlength</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> Node <span style="color:#f92672">*</span>temp <span style="color:#f92672">=</span> head;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (temp <span style="color:#f92672">!=</span> NULL)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        count<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>        temp <span style="color:#f92672">=</span> temp<span style="color:#f92672">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Total nodes present in the list is: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, count);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+
 
 
   <div class="collapsable-code">

@@ -242,7 +242,7 @@ here also after executing some command we got the third ingridient.&lt;/p&gt;
       
       <guid>https://secblogs.netlify.app/posts/first/</guid>
       <description>Upload Vulnerabilities |&amp;gt; Room link: https://tryhackme.com/room/uploadvulns
-⚠️Tools used: &amp;gt; Burpsuite &amp;gt; gobuster &amp;gt; Wappalyser Tools used: * Burpsuite * gobuster * Wappalyser Task 1 Getting Started Let&amp;rsquo;s deploy the machine to give it a few minutes to boot. click on the Start Machine button. now you have to configure your own pc.
+⚠️Tools used: &amp;gt; Burpsuite &amp;gt; gobuster &amp;gt; Wappalyser Task 1 Getting Started Let&amp;rsquo;s deploy the machine to give it a few minutes to boot. click on the Start Machine button. now you have to configure your own pc.
 open host file
 on linux /etc/hosts on windows C:\Windows\System32\drivers\etc\hosts Task 2 Introduction The purpose of this room to explore some of the vulnerabilities resulting from improper handling of file uploads.</description>
       <content>&lt;h1 id=&#34;upload-vulnerabilities&#34;&gt;Upload Vulnerabilities&lt;/h1&gt;
@@ -265,11 +265,7 @@ on linux /etc/hosts on windows C:\Windows\System32\drivers\etc\hosts Task 2 Intr
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Tools used:
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; Burpsuite  
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; gobuster   
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; Wappalyser 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;task-1-getting-started&#34;&gt;Task 1 Getting Started&lt;/h2&gt;
+&lt;h2 id=&#34;task-1-getting-started&#34;&gt;Task 1 Getting Started&lt;/h2&gt;
 &lt;p&gt;Let&amp;rsquo;s deploy the machine to give it a few minutes to boot.
 click on the &lt;code&gt;Start Machine&lt;/code&gt; button.
 now you have to configure your own pc.&lt;/p&gt;
@@ -288,19 +284,7 @@ We will be looking at:&lt;/p&gt;
 &lt;li&gt;Bypassing various kinds of Server-Side filtering&lt;/li&gt;
 &lt;li&gt;Fooling content type validation checks&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// length of the linked
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getlength&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; Node &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;temp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; head;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (temp &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; NULL)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        count&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        temp &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; temp&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;next;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Total nodes present in the list is: %d&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;, count);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
 
   &lt;div class=&#34;collapsable-code&#34;&gt;
