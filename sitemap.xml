@@ -20,13 +20,12 @@
     <loc>https://secblogs.netlify.app/about/</loc>
     <lastmod>2019-01-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://secblogs.netlify.app/showcase/</loc>
-    <lastmod>2018-07-18T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://secblogs.netlify.app/posts/</loc>
     <lastmod>2018-07-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://secblogs.netlify.app/categories/</loc>
+  </url><url>
+    <loc>https://secblogs.netlify.app/showcase/</loc>
   </url><url>
     <loc>https://secblogs.netlify.app/tags/</loc>
   </url>

