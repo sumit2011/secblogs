@@ -8,19 +8,21 @@
     <language>en</language>
     <lastBuildDate>Sun, 08 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://secblogs.netlify.app/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Basic pentesting</title>
+      <title>Basic Pentesting</title>
       <link>https://secblogs.netlify.app/posts/basic-pentesting/</link>
       <pubDate>Sun, 08 Oct 2023 00:00:00 +0000</pubDate>
       
       <guid>https://secblogs.netlify.app/posts/basic-pentesting/</guid>
-      <description>Intro Room Link: https://tryhackme.com/room/basicpentestingjt
-⚠️Tools used: &amp;gt; Ping &amp;gt; Nmap &amp;gt; Gobuster &amp;gt; Enum4linux &amp;gt; Hydra ping scan command: ping 10.10.164.240
-┌──(sumit㉿mr-nob0dy)-[~/ctf/tryhackme/basic-pentesting] └─$ ping 10.10.164.240 PING 10.10.164.240 (10.10.164.240) 56(84) bytes of data. 64 bytes from 10.10.164.240: icmp_seq=1 ttl=63 time=192 ms 64 bytes from 10.10.164.240: icmp_seq=2 ttl=63 time=187 ms 64 bytes from 10.10.164.240: icmp_seq=3 ttl=63 time=396 ms 64 bytes from 10.10.164.240: icmp_seq=4 ttl=63 time=271 ms 64 bytes from 10.10.164.240: icmp_seq=5 ttl=63 time=191 ms 64 bytes from 10.</description>
+      <description>Intro In this challange you will learn how the pentesting is performed on a web application.Also you gonna learn the processes involve information gathering, vulnerability scanning, exploitation, and post-exploitation analysis by using bunch of hacking tools like hydra, gobuster, nmap and many more.
+Room Link: https://tryhackme.com/room/basicpentestingjt
+⚠️Tools used: &amp;gt; Ping &amp;gt; Nmap &amp;gt; Gobuster &amp;gt; Enum4linux &amp;gt; Hydra ping scan command:ping 10.10.164.240
+┌──(sumit㉿mr-nob0dy)-[~/ctf/tryhackme/basic-pentesting] └─$ ping 10.10.164.240 PING 10.10.164.240 (10.10.164.240) 56(84) bytes of data.</description>
       <content>
 &lt;img src=&#34;../basic-pentesting/cover.png&#34;  alt=&#34;Hello Friend&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
 
 
 &lt;h1 id=&#34;intro&#34;&gt;Intro&lt;/h1&gt;
+&lt;p&gt;In this challange you will learn how the pentesting is performed on a web application.Also you gonna learn the processes involve information gathering, vulnerability scanning, exploitation, and post-exploitation analysis by using bunch of hacking tools like hydra, gobuster, nmap and many more.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Room Link: &lt;a href=&#34;https://tryhackme.com/room/basicpentestingjt&#34;&gt;https://tryhackme.com/room/basicpentestingjt&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -48,8 +50,12 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;img src=&#34;../basic-pentesting/photo1.png&#34;  alt=&#34;page source&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
 &lt;h1 id=&#34;ping-scan&#34;&gt;ping scan&lt;/h1&gt;
-&lt;p&gt;command: &lt;code&gt;ping 10.10.164.240&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;command:&lt;code&gt;ping 10.10.164.240&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌──&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;sumit㉿mr-nob0dy&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;~/ctf/tryhackme/basic-pentesting&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─$ ping 10.10.164.240
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PING 10.10.164.240 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;10.10.164.240&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; 56&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;84&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; bytes of data.
@@ -65,6 +71,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rtt min/avg/max/mdev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 187.244/237.909/396.222/76.726 ms
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                           
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;nmap&#34;&gt;nmap&lt;/h1&gt;
+&lt;p&gt;command:&lt;code&gt;nmap -sV -oN nmap/basic-pentesting 10.10.164.240&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌──&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;sumit㉿mr-nob0dy&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;~/ctf/tryhackme/basic-pentesting&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─$ nmap -sV -oN nmap/basic-pentesting 10.10.164.240
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Starting Nmap 7.94 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt; https://nmap.org &lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; at 2023-10-08 23:17 IST
@@ -88,6 +95,7 @@
 139
 445
 &lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;gobuster&#34;&gt;gobuster&lt;/h1&gt;
+&lt;p&gt;command:&lt;code&gt;gobuster dir -u http://10.10.164.240/ -w /home//sumit/ctf/directory-list-2.3-medium.txt&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌──&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;sumit㉿mr-nob0dy&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;~/ctf/tryhackme/basic-pentesting&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─$ gobuster dir -u http://10.10.164.240/ -w /home//sumit/ctf/directory-list-2.3-medium.txt
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
@@ -111,8 +119,20 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Finished
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;enum4linux&#34;&gt;enum4linux&lt;/h1&gt;
-&lt;p&gt;command: &lt;code&gt;enum4linux -a 10.10.164.240&lt;/code&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;img src=&#34;../basic-pentesting/photo2.png&#34;  alt=&#34;page source&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+
+&lt;img src=&#34;../basic-pentesting/photo3.png&#34;  alt=&#34;page source&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+
+&lt;img src=&#34;../basic-pentesting/photo4.png&#34;  alt=&#34;page source&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
+
+
+&lt;h1 id=&#34;enum4linux&#34;&gt;enum4linux&lt;/h1&gt;
+&lt;p&gt;command:&lt;code&gt;enum4linux -a 10.10.164.240&lt;/code&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
 [+] Enumerating users using SID S-1-22-1 and logon username &amp;#39;&amp;#39;, password &amp;#39;&amp;#39;
 
@@ -121,7 +141,7 @@ S-1-22-1-1001 Unix User\jan (Local User)
 
 [+] Enumerating users using SID S-1-5-21-2853212168-2008227510-3551253869 and logon username &amp;#39;&amp;#39;, password &amp;#39;&amp;#39;
 &lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;hydra&#34;&gt;hydra&lt;/h1&gt;
-&lt;p&gt;command: &lt;code&gt;hydra -l jan -P /home/sumit/ctf/rockyou.txt ssh://10.10.164.240&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;command:&lt;code&gt;hydra -l jan -P /home/sumit/ctf/rockyou.txt ssh://10.10.164.240&lt;/code&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
 [STATUS] 92.00 tries/min, 276 tries in 00:03h, 14344125 to do in 2598:35h, 13 active
 [STATUS] 91.71 tries/min, 642 tries in 00:07h, 14343759 to do in 2606:37h, 13 active
@@ -179,6 +199,8 @@ Ans: &lt;code&gt;No answer needed&lt;/code&gt;&lt;/p&gt;
 Ans: &lt;code&gt;  &lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;h1 id=&#34;congrats-we-have-successfully-completed-the-room-hope-you-learnt-something-new&#34;&gt;Congrats, we have successfully completed the room, hope you learnt something new&amp;hellip;&lt;/h1&gt;
+&lt;p&gt;Thanks for the reading&amp;hellip;&lt;/p&gt;
 </content>
     </item>
     
