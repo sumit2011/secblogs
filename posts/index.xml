@@ -15,8 +15,7 @@
       <guid>https://secblogs.netlify.app/posts/basic-pentesting/</guid>
       <description>Intro In this challange you will learn how the pentesting is performed on a web application.Also you gonna learn the processes involve information gathering, vulnerability scanning, exploitation, and post-exploitation analysis by using bunch of hacking tools like hydra, gobuster, nmap and many more.
 Room Link: https://tryhackme.com/room/basicpentestingjt
-⚠️Tools used: &amp;gt; Ping &amp;gt; Nmap &amp;gt; Gobuster &amp;gt; Enum4linux &amp;gt; Hydra ping scan command:ping 10.10.164.240
-┌──(sumit㉿mr-nob0dy)-[~/ctf/tryhackme/basic-pentesting] └─$ ping 10.10.164.240 PING 10.10.164.240 (10.10.164.240) 56(84) bytes of data.</description>
+⚠️Tools used: &amp;gt; Ping &amp;gt; Nmap &amp;gt; Gobuster &amp;gt; Enum4linux &amp;gt; Hydra ping scan Do the ping scan to check the host is reachable or not across the ip address.</description>
       <content>
 &lt;img src=&#34;../basic-pentesting/cover.png&#34;  alt=&#34;Hello Friend&#34;  class=&#34;center&#34;  style=&#34;border-radius: 8px;&#34;    /&gt;
 
@@ -55,7 +54,8 @@ Room Link: https://tryhackme.com/room/basicpentestingjt
 
 
 &lt;h1 id=&#34;ping-scan&#34;&gt;ping scan&lt;/h1&gt;
-&lt;p&gt;command:&lt;code&gt;ping 10.10.164.240&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Do the ping scan to check the host is reachable or not across the ip address./
+command:&lt;code&gt;ping 10.10.164.240&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌──&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;sumit㉿mr-nob0dy&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;~/ctf/tryhackme/basic-pentesting&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─$ ping 10.10.164.240
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PING 10.10.164.240 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;10.10.164.240&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; 56&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;84&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; bytes of data.
@@ -71,7 +71,15 @@ Room Link: https://tryhackme.com/room/basicpentestingjt
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rtt min/avg/max/mdev &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 187.244/237.909/396.222/76.726 ms
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                           
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;nmap&#34;&gt;nmap&lt;/h1&gt;
-&lt;p&gt;command:&lt;code&gt;nmap -sV -oN nmap/basic-pentesting 10.10.164.240&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now do the nmap scan to check which ports are open. To run the nmap scan first create the nmap directory then run the following command by this you can store the result of nmap scan into a file./
+command:&lt;code&gt;mkdir nmap&lt;/code&gt;&lt;br&gt;
+command:&lt;code&gt;cd nmap&lt;/code&gt;&lt;br&gt;
+command:&lt;code&gt;nmap -sV -oN nmap/basic-pentesting 10.10.164.240&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Command breakdown:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;-sv : version detection.&lt;/li&gt;
+&lt;li&gt;-oN : store the output into the given folder.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌──&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;sumit㉿mr-nob0dy&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;~/ctf/tryhackme/basic-pentesting&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─$ nmap -sV -oN nmap/basic-pentesting 10.10.164.240
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Starting Nmap 7.94 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt; https://nmap.org &lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; at 2023-10-08 23:17 IST
@@ -89,13 +97,15 @@ Room Link: https://tryhackme.com/room/basicpentestingjt
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Nmap &lt;span style=&#34;color:#66d9ef&#34;&gt;done&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; IP address &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; host up&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; scanned in 56.82 seconds
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;open ports&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Following ports are open.
+open ports&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;22
 80
 139
 445
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;gobuster&#34;&gt;gobuster&lt;/h1&gt;
-&lt;p&gt;command:&lt;code&gt;gobuster dir -u http://10.10.164.240/ -w /home//sumit/ctf/directory-list-2.3-medium.txt&lt;/code&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;finding-hidden-directories&#34;&gt;Finding hidden directories&lt;/h1&gt;
+&lt;p&gt;To find hidden directories on the server we use the gobuster tool just run the following command. Also provide the wordlist, here we use the default list of directories which is already given in the linux.&lt;br&gt;
+command:&lt;code&gt;gobuster dir -u http://10.10.164.240/ -w /home//sumit/ctf/directory-list-2.3-medium.txt&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;┌──&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;sumit㉿mr-nob0dy&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;-&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;~/ctf/tryhackme/basic-pentesting&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─$ gobuster dir -u http://10.10.164.240/ -w /home//sumit/ctf/directory-list-2.3-medium.txt
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;===============================================================&lt;/span&gt;
